@@ -33,4 +33,5 @@ yarn
 yarn start
 ```
 
-Made with 💜 by LabQuatro. 
+<hr>
+<h6>Made with 💜 by LabQuatro<h6/>
