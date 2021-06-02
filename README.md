@@ -12,10 +12,12 @@
 | [kubrick](modules/kubrick) | Django REST Framework API |
 | [spielberg](modules/spielberg) | React CRA frontend |
 
-Made with 💜 by LabQuatro. 
 
 ## Other important resources
 
 [Trello Board](https://trello.com/b/2qTivVAN/aposcar)
 
 [Figma File](https://www.figma.com/file/2r4ykOJfUYY21oTgLwtq7G/Aposcar?node-id=0%3A1)
+
+<hr>
+<h6>Made with 💜 by LabQuatro<h6/>
