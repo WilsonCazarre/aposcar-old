@@ -1,51 +1,63 @@
-# Aposcar API Rest
+<p align="center">
+    <img height=100 src="https://raw.githubusercontent.com/lab-quatro/aposcar/main/aposcar_logo.svg"/>
+</p>
 
-> Vote and compete with your friends to discover who knows more about the Academy Awards
+<p align="center">
+    <strong>Vote and compete with your friends to discover who knows more about the Academy Awards</strong>
+</p>
 
-[![CircleCI](https://circleci.com/gh/lab-quatro/kubrick.svg?style=svg)](https://app.circleci.com/pipelines/github/lab-quatro/kubrick)
-![Dependabot](https://badgen.net/dependabot/badge-gen/lab-quatro/kubrick?icon=dependabot)
-![Coverage](coverage.svg)
-[![CodeFactor](https://www.codefactor.io/repository/github/lab-quatro/kubrick/badge)](https://www.codefactor.io/repository/github/lab-quatro/kubrick)
-<br />
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I32TNLJ)
+## About this folder
+`kubrick` is our REST API built on [Django REST Framework](https://www.django-rest-framework.org/)
 
 
 ## How to contribute
 
-1 - Clone the Repo:
-```
-git clone https://github.com/lab-quatro/kubrick.git
+We're using pipenv for this project, make sure to [install it](https://github.com/pypa/pipenv#installation).
+
+
+1 - Clone the project and navigate to the folder:
+```bash
+git clone https://github.com/lab-quatro/aposcar.git
+cd aposcar\kubrick
 ```
 
-2 - Create and activate the virtual environment
+2 - Create the virtual environment and install the dependencies
 
-```
-cd kubrick
-python -m venv venv
-venv\Scripts\activate.bat
+```bash
+pipenv install
 ```
 
-3 - Install the dependencies
-```
-python -m pip install -r requirements.txt
+3 - Activate the virtual environment
+
+```bash
+pipenv shell
 ```
 
-4 - Execute the initial schema migrations
+4 - Create a `.env` file in the module root with this content
+```dotenv
+SECRET_KEY="Your django secret key"
+
+CSRF_COOKIE_SECURE="False"
+DEBUG="True"
+SECURE_SSL_REDIRECT="False"
 ```
+
+5 - Execute the initial schema migrations
+```bash
 python manage.py migrate
 ```
 
-5 - Execute the initial data migrations
+6 - Execute the initial data migrations
 ```
 python manage.py loaddata initial_data/*
 ```
 
-5 - Create a user to work with
+7 - Create a user to work with
 ```
 python manage.py createsuperuser
 ```
 
-6 - Start the development server
+8 - Start the development server
 ```
 python manage.py runserver
 ```
