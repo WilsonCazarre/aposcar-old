@@ -10,7 +10,7 @@
 `kubrick` is our REST API built on [Django REST Framework](https://www.django-rest-framework.org/)
 
 
-## How to contribute
+## How to run this module
 
 We're using pipenv for this project, make sure to [install it](https://github.com/pypa/pipenv#installation).
 
@@ -61,3 +61,5 @@ python manage.py createsuperuser
 ```
 python manage.py runserver
 ```
+
+Made with 💜 by LabQuatro. 

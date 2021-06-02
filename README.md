@@ -11,3 +11,5 @@
 | :-------------------- | :-----------------------: |
 | [kubrick](modules/kubrick) | Django REST Framework API |
 | [spielberg](modules/spielberg) | React CRA frontend |
+
+Made with 💜 by LabQuatro. 
