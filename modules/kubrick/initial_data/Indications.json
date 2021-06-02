@@ -1,0 +1,211 @@
+[
+    {
+        "model": "awards.indication",
+        "pk": 4,
+        "fields": {
+            "nominated": 2,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 5,
+        "fields": {
+            "nominated": 3,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 6,
+        "fields": {
+            "nominated": 4,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 7,
+        "fields": {
+            "nominated": 5,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 8,
+        "fields": {
+            "nominated": 6,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 9,
+        "fields": {
+            "nominated": 7,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 10,
+        "fields": {
+            "nominated": 8,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 11,
+        "fields": {
+            "nominated": 9,
+            "category": 1,
+            "year": 2020,
+            "annotation": "",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 12,
+        "fields": {
+            "nominated": 10,
+            "category": 1,
+            "year": 2020,
+            "annotation": "Kwak Sin-ae and Bong Joon-ho",
+            "is_winner": true
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 13,
+        "fields": {
+            "nominated": 3,
+            "category": 8,
+            "year": 2020,
+            "annotation": "Taika Waititi",
+            "is_winner": true
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 14,
+        "fields": {
+            "nominated": 5,
+            "category": 8,
+            "year": 2020,
+            "annotation": "Steven Zaillian",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 15,
+        "fields": {
+            "nominated": 2,
+            "category": 8,
+            "year": 2020,
+            "annotation": "Todd Phillips",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 16,
+        "fields": {
+            "nominated": 6,
+            "category": 8,
+            "year": 2020,
+            "annotation": "Greta Gerwig",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 17,
+        "fields": {
+            "nominated": 11,
+            "category": 8,
+            "year": 2020,
+            "annotation": "Anthony McCarten",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 18,
+        "fields": {
+            "nominated": 12,
+            "category": 2,
+            "year": 2020,
+            "annotation": "Parasite",
+            "is_winner": true
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 19,
+        "fields": {
+            "nominated": 13,
+            "category": 2,
+            "year": 2020,
+            "annotation": "The Irishman",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 20,
+        "fields": {
+            "nominated": 14,
+            "category": 2,
+            "year": 2020,
+            "annotation": "Joker",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 21,
+        "fields": {
+            "nominated": 15,
+            "category": 2,
+            "year": 2020,
+            "annotation": "1917",
+            "is_winner": false
+        }
+    },
+    {
+        "model": "awards.indication",
+        "pk": 22,
+        "fields": {
+            "nominated": 16,
+            "category": 2,
+            "year": 2020,
+            "annotation": "Once Upon a Time in Hollywood",
+            "is_winner": false
+        }
+    }
+]
