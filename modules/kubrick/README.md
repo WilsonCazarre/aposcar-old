@@ -61,5 +61,6 @@ python manage.py createsuperuser
 ```
 python manage.py runserver
 ```
+<hr>
+<h6>Made with 💜 by LabQuatro<h6/>
 
-Made with 💜 by LabQuatro. 
