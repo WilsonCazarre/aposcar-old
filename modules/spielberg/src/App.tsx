@@ -1,10 +1,9 @@
 import React, { Suspense } from "react";
 import Footer from "./components/Footer";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import CategoryListPage from "./pages/CategoryListPage";
 import RegisterPage from "./pages/RegisterPage";
-import NotFoundPage from "./pages/NotFoundPage";
 import Navbar from "./components/Navbar";
 import ProfilePage from "./pages/ProfilePage";
 import CategoriesRoutes from "./components/CategoriesRoutes";
@@ -30,7 +29,7 @@ function App() {
             </Route>
 
             {/* This route should always be the last */}
-            <Route exact path="*" component={NotFoundPage} />
+            <Route exact path="*" component={() => <Redirect to="/app" />} />
           </Switch>
         </Suspense>
       </div>
