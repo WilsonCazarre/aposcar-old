@@ -29,7 +29,11 @@ function App() {
             </Route>
 
             {/* This route should always be the last */}
-            <Route exact path="*" component={() => <Redirect to="/app" />} />
+            <Route
+              exact
+              path="*"
+              component={() => <Redirect exact to="/app/" />}
+            />
           </Switch>
         </Suspense>
       </div>
