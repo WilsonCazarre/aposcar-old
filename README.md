@@ -5,12 +5,19 @@
 <p align="center">
     <strong>Vote and compete with your friends to discover who knows more about the Academy Awards</strong>
 </p>
+<hr>
 
 ## Codebase
 | Module                |      Description          |
 | :-------------------- | :-----------------------: |
 | [kubrick](modules/kubrick) | Django REST Framework API |
 | [spielberg](modules/spielberg) | React CRA frontend |
+
+## Branches
+
+`main`-> This is our production branch
+
+`develop` -> Open all PR's to this branch please
 
 
 ## Other important resources
