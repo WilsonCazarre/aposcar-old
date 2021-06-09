@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import Footer from "./components/Footer";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import CategoryListPage from "./pages/CategoryListPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -15,7 +15,7 @@ const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 
 function App() {
   return (
-    <div className="bg-gray-800 text-white h-screen static overflow-auto flex flex-col">
+    <div className="bg-gray-900 text-white h-screen static overflow-auto flex flex-col">
       <Route path="/app" component={Navbar} />
       <div className="flex-grow">
         <Suspense fallback={<LoadingOverlay />}>

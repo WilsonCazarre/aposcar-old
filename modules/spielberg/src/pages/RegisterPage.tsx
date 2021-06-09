@@ -12,7 +12,6 @@ import AuthForm from "../components/Forms/AuthForm";
 import InputField from "../components/Forms/InputField";
 import Button from "../components/Button";
 import LoadingComponent from "../components/LoadingComponent";
-import useAlert from "../hooks/useAlert";
 
 interface FormFields {
   username: string;
@@ -24,7 +23,7 @@ const RegisterPage: React.FC = () => {
   const { handleSubmit, register, errors, setError } = useForm<FormFields>();
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
-  const { setAlert } = useAlert();
+  //const { setAlert } = useAlert();
 
   const userMutation = useMutation<
     AxiosResponse<User>,
@@ -33,7 +32,7 @@ const RegisterPage: React.FC = () => {
   >((formData: FormFields) => api.post<User>("/users/", formData), {
     mutationKey: "createUser",
     onSuccess: (_data) => {
-      setAlert("Your account was created, give it a try :)");
+      //setAlert("Your account was created, give it a try :)");
       history.push("/login");
     },
     onError: (e) => {

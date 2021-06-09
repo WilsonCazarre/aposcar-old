@@ -6,8 +6,8 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {}
 const AuthForm: React.FC<Props> = ({ children, ...rest }) => {
   return (
     <div
-      className="text-center p-4 bg-transparent w-full rounded-2xl
-      sm:bg-gray-700 mx-auto w-full sm:w-96 mt-5 sm:mt-10"
+      className="text-center p-4 bg-transparent w-full rounded-2xl border border-gray-600
+      sm:bg-gray-800 mx-auto w-full sm:w-96 mt-5 sm:mt-10"
     >
       <img
         src={logo}

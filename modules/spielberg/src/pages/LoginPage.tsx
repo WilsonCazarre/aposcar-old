@@ -72,7 +72,7 @@ const LoginPage: React.FC = () => {
 
           <Link
             to="/register"
-            className="flex-1 py-1 px-6 rounded outline-none text-white bg-gray-700 sm:bg-gray-800"
+            className="flex-1 py-1 px-6 rounded outline-none text-white bg-gray-700"
           >
             Register
           </Link>
