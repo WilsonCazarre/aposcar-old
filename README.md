@@ -5,6 +5,7 @@
 <p align="center">
     <strong>Vote and compete with your friends to discover who knows more about the Academy Awards</strong>
 </p>
+<hr>
 
 ## Codebase
 | Module                |      Description          |
