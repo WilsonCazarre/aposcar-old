@@ -14,19 +14,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == 'True'
-
-ADMINS = [('Wilson Cazarré', 'wcs0486@gmail.com')]
-
-ALLOWED_HOSTS = ['*']
-
-# Redirect all HTTP request do HTTPS
-# See https://docs.djangoproject.com/en/3.1/ref/settings/#secure-ssl-redirect
-SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT') == 'True'
-
-CORS_ALLOW_ALL_ORIGINS = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -79,27 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kubrick.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-# POSTGRES_DATABASE = {
-#     'ENGINE': 'django.db.backends.postgresql',
-#     'NAME': os.getenv('DATABASE_NAME'),
-#     'USER': os.getenv('DATABASE_USER'),
-#     'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-#     'HOST': os.getenv('DATABASE_HOST'),
-#     'PORT': os.getenv('DATABASE_PORT')
-# }
-
-SQL_LITE_DATABASE = {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': BASE_DIR / 'db.sqlite3',
-}
-
-DATABASES = {
-    'default': SQL_LITE_DATABASE
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -139,25 +105,9 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.UserProfile'
 
-# Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'no-replay@labqu4tro.com'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
-# Azure Storage Settings
-AZURE_CONNECTION_STRING = str(os.getenv('AZURE_CONNECTION_STRING'))
-AZURE_CONTAINER = str(os.getenv('AZURE_CONTAINER'))
-
-CSRF_COOKIE_SECURE = os.getenv('SECURE_SSL_REDIRECT') == 'True'
-CSRF_COOKIE_HTTPONLY = False
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -175,9 +125,3 @@ REST_FRAMEWORK = {
 }
 
 AWARD_CURRENT_YEAR = 2020
-
-# Calling heroku settings only on Heroku environment
-if 'I_AM_HEROKU' in os.environ:
-    # Configure Django App for Heroku.
-    import django_heroku
-    django_heroku.settings(locals())
