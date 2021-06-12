@@ -1,6 +1,5 @@
+import os
 import django.core.exceptions
-
-from .common import *
 
 try:
     is_dev = os.environ["DJANGO_ENVIRONMENT"] == "dev"
