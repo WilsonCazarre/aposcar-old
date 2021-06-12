@@ -1,6 +1,10 @@
 import os
 import django.core.exceptions
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 try:
     is_dev = os.environ["DJANGO_ENVIRONMENT"] == "dev"
 except KeyError:

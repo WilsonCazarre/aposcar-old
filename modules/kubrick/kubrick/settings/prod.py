@@ -29,6 +29,8 @@ SECURE_SSL_REDIRECT = True
 #     'PORT': os.getenv('DATABASE_PORT')
 # }
 
+DATABASES = {}
+
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -67,4 +69,4 @@ LOGGING = {
 if 'I_AM_HEROKU' in os.environ:
     # Configure Django App for Heroku.
     import django_heroku
-    django_heroku.settings(locals() | globals())
+    django_heroku.settings(locals())
