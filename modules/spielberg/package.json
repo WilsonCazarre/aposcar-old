@@ -1,6 +1,5 @@
 {
-  "name": "aposcar_web_client",
-  "version": "0.1.0",
+  "name": "@aposcar/kubrick",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.1",

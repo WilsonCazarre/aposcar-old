@@ -1,0 +1,16 @@
+{
+  "name": "aposcar",
+  "private": true,
+  "scripts": {
+    "commit": "cz"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "3.3.0",
+    "cz-customizable": "6.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  }
+}
