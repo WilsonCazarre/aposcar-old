@@ -15,5 +15,7 @@ except KeyError:
 
 if os.environ["DJANGO_ENVIRONMENT"] == "dev":
     from .dev import *
-else:
+elif os.environ['DJANGO_ENVIRONMENT'] == 'test':
+    from .tests import *
+elif os.environ['DJANGO_ENVIRONMENT'] == 'prod':
     from .prod import *
