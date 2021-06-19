@@ -8,19 +8,17 @@
 
 
 ## About this folder
-`spielberg` is our Frontend application built with [Create React App](https://create-react-app.dev/)
+`spielberg` is our Frontend application built with [Next.js](https://create-react-app.dev/)
 
 
 We're using `yarn` for this project, make sure to install it [here](https://yarnpkg.com/getting-started/install) before running this commands
 
 ## How to run this module
 
-0 - You need to run [our REST API](/modules/kubrick) first before being able to use this frontend properly.
-
 1 - Clone the project and navigate to the folder:
 ```bash
 git clone https://github.com/lab-quatro/aposcar.git
-cd aposcar\spielberg
+cd aposcar/spielberg
 ```
 
 2 - Install the dependencies
@@ -30,7 +28,7 @@ yarn
 
 3 - Start the dev server
 ```
-yarn start
+yarn dev
 ```
 
 <hr>
