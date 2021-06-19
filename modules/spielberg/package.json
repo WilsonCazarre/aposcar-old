@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env APOSCAR_API_URL=https://aposcar.herokuapp.com next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,13 +11,18 @@
   "dependencies": {
     "next": "11.0.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-modal": "^3.14.3"
   },
   "devDependencies": {
     "@types/react": "17.0.11",
+    "@types/react-modal": "^3.12.0",
+    "autoprefixer": "^10.2.6",
     "cross-env": "^7.0.3",
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.0",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.2",
     "typescript": "4.3.4"
   }
 }
