@@ -5,6 +5,7 @@
     "commit": "cz"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "cz-conventional-changelog": "3.3.0",
     "cz-customizable": "6.3.0"
   },
