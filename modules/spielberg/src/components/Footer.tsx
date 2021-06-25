@@ -4,9 +4,12 @@ const Footer: React.FC = () => {
   return (
     <div
       className="flex-none bg-gray-800 border-t
-    border-gray-600 p-1 text-center text-sm"
+    border-gray-700 p-1 text-center text-sm"
     >
-      Made with 💜 by LabQuatro | Buy us a Ko-fi
+      Made with 💜 by LabQuatro |{" "}
+      <a href="https://ko-fi.com/labquatro" target="_blank" rel="noreferrer">
+        Buy us a Ko-fi
+      </a>
     </div>
   );
 };

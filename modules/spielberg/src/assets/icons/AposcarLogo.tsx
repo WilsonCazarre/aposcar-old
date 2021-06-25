@@ -1,6 +1,6 @@
 import React from "react";
 
-const AposcarLogo: React.FC = (props: React.SVGProps<SVGSVGElement>) => {
+const AposcarLogo: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       width="173"

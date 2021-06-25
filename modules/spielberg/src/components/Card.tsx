@@ -1,15 +1,24 @@
 import React, { ReactNode } from "react";
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   header?: ReactNode;
 }
 
-const Card: React.FC<Props> = ({ children, header }) => {
-  return (
-    <div className="bg-gray-800 border border-gray-600 rounded w-full">
-      {header && <div className="border-b border-gray-600 p-2">{header}</div>}
+const Card: React.FC<Props> = ({ children, header, ...props }) => {
+  const { className, ...rest } = props;
 
-      <div className="p-2">{children}</div>
+  return (
+    <div
+      className={`bg-gray-800 border border-gray-700 rounded-xl ${
+        className ?? ""
+      }`}
+      {...rest}
+    >
+      {header && (
+        <div className="border-b border-gray-700 p-2 pl-4">{header}</div>
+      )}
+
+      {children && <div className="p-2">{children}</div>}
     </div>
   );
 };

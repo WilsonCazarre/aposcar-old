@@ -16,15 +16,13 @@ export default function Home() {
       </Head>
       <main className="h-full">
         <MainLayout>
-          <div className="grid grid-cols-2 p-10 pt-7 gap-7 h-full">
+          <div className="grid grid-cols-1 p-10 pt-7 gap-7 h-full md:grid-cols-2">
             <Card
               header={<div className="font-bold text-2xl">Global Ranking</div>}
-            >
-              home
-            </Card>
-            <Card header={<div className="font-bold text-2xl">Categories</div>}>
-              home
-            </Card>
+            />
+            <Card
+              header={<div className="font-bold text-2xl">Categories</div>}
+            />
           </div>
         </MainLayout>
       </main>
