@@ -27,7 +27,6 @@ django-rest-passwordreset = "==1.1.0"
 django-storages = "==1.11.1"
 djangorestframework = "==3.12.1"
 djangorestframework-camel-case = "==1.2.0"
-djangorestframework-jwt = "==1.11.0"
 drf-yasg = "==1.20.0"
 gunicorn = "==20.0.4"
 idna = "==2.10"
@@ -51,7 +50,7 @@ Django = "==3.1.5"
 Jinja2 = "==2.11.2"
 MarkupSafe = "==1.1.1"
 Pillow = "==8.1.0"
-PyJWT = "==1.7.1"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

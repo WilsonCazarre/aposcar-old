@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView, \
+    TokenRefreshView
 
 import apps.awards.views
 import apps.users.views
@@ -28,6 +30,10 @@ router.register(r'rooms', apps.users.views.RoomViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('token/', TokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(),
+         name='token_refresh'),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
