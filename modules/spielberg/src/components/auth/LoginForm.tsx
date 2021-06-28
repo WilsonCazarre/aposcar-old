@@ -7,11 +7,7 @@ import { useRouter } from "next/router";
 import useAuth from "../../lib/useAuth";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import {
-  ACCESS_TOKEN_NAME,
-  KUBRICK_URL,
-  REFRESH_TOKEN_NAME,
-} from "../../utils/constants";
+import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../utils/constants";
 import jwtDecode from "jwt-decode";
 import { UserTokenClaims } from "./AuthProvider";
 import { AxiosResponse } from "axios";
