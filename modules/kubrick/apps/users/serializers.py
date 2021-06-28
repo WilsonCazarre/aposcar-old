@@ -16,7 +16,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                   'profile_picture', 'bets', 'score', 'password']
         extra_kwargs = {
             'password': {'write_only': True},
-            'date_joined': {'read_only': True}
+            'date_joined': {'read_only': True},
+            'url': {'lookup_field': 'username'}
         }
 
     def create(self, validated_data):
