@@ -4,7 +4,7 @@ from .common import *
 DEBUG = False
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ORIGIN_WHITELIST = ['https://aposcar.netlify.app', 'http://localhost']
+CORS_ORIGIN_WHITELIST = ['https://aposcar.netlify.app', 'http://localhost:3000']
 
 
 ADMINS = [('Wilson Cazarré', 'labqu4tro@gmail.com')]
