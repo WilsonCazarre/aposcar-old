@@ -18,6 +18,7 @@ from apps.core.permissions import IsProfileOwnerOrReadOnlyOrStaff, \
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.UserSerializer
     permission_classes = [IsProfileOwnerOrReadOnlyOrStaff]
+    lookup_field = 'username'
 
     def get_queryset(self):
         queryset = models.UserProfile.objects.all()
