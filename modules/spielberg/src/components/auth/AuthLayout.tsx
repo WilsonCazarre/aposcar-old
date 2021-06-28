@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../Card";
 import AposcarLogo from "../../assets/icons/AposcarLogo";
+import useAuth from "../../lib/useAuth";
+import { useRouter } from "next/router";
 
 const AuthLayout: React.FC = ({ children }) => {
+  const router = useRouter();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [router, user]);
+
   return (
     <div className="h-screen">
       <div className="w-96 py-24 mx-auto">

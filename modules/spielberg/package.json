@@ -1,9 +1,10 @@
 {
   "name": "spielberg",
   "version": "0.1.0",
+  "description": "Aposcar React Frontend",
   "private": true,
   "scripts": {
-    "dev": "cross-env KUBRICK_URL=https://aposcar.herokuapp.com next dev",
+    "dev": "cross-env next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,11 +12,13 @@
   "dependencies": {
     "@heroicons/react": "^1.0.1",
     "axios": "^0.21.1",
+    "jwt-decode": "^3.1.2",
     "next": "11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.9.0",
-    "react-modal": "^3.14.3"
+    "react-modal": "^3.14.3",
+    "react-query": "^3.17.3"
   },
   "devDependencies": {
     "@types/react": "17.0.11",
