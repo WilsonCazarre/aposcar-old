@@ -1,8 +1,7 @@
 from django.conf.urls import url
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenObtainPairView, \
-    TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 import apps.awards.views
 import apps.users.views
@@ -30,7 +29,7 @@ router.register(r'rooms', apps.users.views.RoomViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('token/', TokenObtainPairView.as_view(),
+    path('token/', apps.users.views.MyTokenObtainPairView.as_view(),
          name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(),
          name='token_refresh'),

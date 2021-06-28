@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from apps.users import models
 
@@ -52,3 +53,13 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Room
         fields = ['url', 'id', 'name', 'owner', 'users', 'share_code']
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user: models.UserProfile):
+        token = super().get_token(user)
+
+        token['name'] = user.username
+
+        return token

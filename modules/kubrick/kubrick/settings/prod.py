@@ -4,12 +4,12 @@ from .common import *
 DEBUG = False
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ORIGIN_WHITELIST = ['https://aposcar.netlify.app']
+CORS_ORIGIN_WHITELIST = ['https://aposcar.netlify.app', 'http://localhost']
 
 
 ADMINS = [('Wilson Cazarré', 'labqu4tro@gmail.com')]
 
-ALLOWED_HOSTS = ['aposcar.herokuapp.com', 'aposcar.netlify.app']
+ALLOWED_HOSTS = ['aposcar.herokuapp.com', 'aposcar.netlify.app', 'localhost']
 
 # Redirect all HTTP request do HTTPS
 # See https://docs.djangoproject.com/en/3.1/ref/settings/#secure-ssl-redirect

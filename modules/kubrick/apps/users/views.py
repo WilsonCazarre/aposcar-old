@@ -8,6 +8,7 @@ from django_rest_passwordreset.signals import reset_password_token_created
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from apps.users import models, serializers
 from apps.core.permissions import IsProfileOwnerOrReadOnlyOrStaff, \
@@ -108,3 +109,7 @@ class CustomPasswordResetView:
         msg.attach_alternative(email_html_message, "text/html")
         msg.send()
         print('message sent')
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = serializers.MyTokenObtainPairSerializer
