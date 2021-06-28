@@ -4,12 +4,16 @@ from .common import *
 DEBUG = False
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ORIGIN_WHITELIST = ['https://aposcar.netlify.app', 'http://localhost:3000']
+CORS_ORIGIN_WHITELIST = ["https://aposcar.vercel.app", "http://localhost:3000"]
 
 
-ADMINS = [('Wilson Cazarré', 'labqu4tro@gmail.com')]
+ADMINS = [("Wilson Cazarré", "labqu4tro@gmail.com")]
 
-ALLOWED_HOSTS = ['aposcar.herokuapp.com', 'aposcar.netlify.app', 'localhost']
+ALLOWED_HOSTS = [
+    "aposcar.herokuapp.com",
+    "aposcar.vercel.app",
+    "localhost",
+]
 
 # Redirect all HTTP request do HTTPS
 # See https://docs.djangoproject.com/en/3.1/ref/settings/#secure-ssl-redirect
@@ -32,41 +36,42 @@ SECURE_SSL_REDIRECT = True
 DATABASES = {}
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+DEFAULT_FILE_STORAGE = "storages.backends.azure_storage.AzureStorage"
 
 # Azure Storage Settings
-AZURE_CONNECTION_STRING = str(os.getenv('AZURE_CONNECTION_STRING'))
-AZURE_CONTAINER = str(os.getenv('AZURE_CONTAINER'))
+AZURE_CONNECTION_STRING = str(os.getenv("AZURE_CONNECTION_STRING"))
+AZURE_CONTAINER = str(os.getenv("AZURE_CONTAINER"))
 
 
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = False
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'logfile': {
-            'class': 'logging.FileHandler',
-            'filename': 'server.log',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "logfile": {
+            "class": "logging.FileHandler",
+            "filename": "server.log",
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['logfile'],
+    "loggers": {
+        "django": {
+            "handlers": ["logfile"],
         },
     },
 }
 
 # Calling heroku settings only on Heroku environment
-if 'I_AM_HEROKU' in os.environ:
+if "I_AM_HEROKU" in os.environ:
     # Configure Django App for Heroku.
     import django_heroku
+
     django_heroku.settings(locals(), logging=False)
