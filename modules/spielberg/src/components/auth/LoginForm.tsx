@@ -1,24 +1,13 @@
 import React from "react";
 import InputWithIcon from "../forms/InputWithIcon";
-import { kubrick } from "../../lib/apiClient";
 import { UserIcon, LockClosedIcon } from "@heroicons/react/outline";
 import Button from "../Button";
 import { useRouter } from "next/router";
 import useAuth from "../../lib/useAuth";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
-import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../utils/constants";
-import jwtDecode from "jwt-decode";
-import { UserTokenClaims } from "./AuthProvider";
-import { AxiosResponse } from "axios";
-import NProgress from "nprogress";
+import { LoginCredentials } from "./AuthProvider";
 
 interface Props {}
-
-interface FormFields {
-  username: string;
-  password: string;
-}
 
 export interface Token {
   refresh: string;
@@ -27,30 +16,11 @@ export interface Token {
 
 const LoginForm: React.FC<Props> = () => {
   const router = useRouter();
-  const { setUser } = useAuth();
-  const { register, handleSubmit } = useForm<FormFields>();
-  const loginMutation = useMutation<AxiosResponse<Token>, unknown, FormFields>(
-    (payload) => {
-      NProgress.start();
-      return kubrick.post("token/", payload);
-    },
-    {
-      onSuccess: (response) => {
-        console.log(response);
-        localStorage.setItem(ACCESS_TOKEN_NAME, response.data.access);
-        localStorage.setItem(REFRESH_TOKEN_NAME, response.data.refresh);
-        const decoded = jwtDecode<UserTokenClaims>(response.data.access);
-        setUser(decoded);
-        router.push("/");
-      },
-      onSettled: () => {
-        NProgress.done();
-      },
-    }
-  );
+  const { login } = useAuth();
+  const { register, handleSubmit } = useForm<LoginCredentials>();
 
-  const onSubmit = (fields: FormFields) => {
-    loginMutation.mutate(fields);
+  const onSubmit = (fields: LoginCredentials) => {
+    login(fields);
   };
 
   return (

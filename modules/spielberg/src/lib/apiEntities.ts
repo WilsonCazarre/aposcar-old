@@ -17,3 +17,17 @@ export interface Category extends BaseEntity {
   urlField: string;
   indications: string[];
 }
+
+export interface Nominee extends BaseEntity {
+  name: string;
+  pictureUrl: string;
+  description: string;
+}
+
+export interface Indication extends BaseEntity {
+  category: string;
+  nominated: Nominee;
+  year: number;
+  isWinner: boolean;
+  annotation: string;
+}

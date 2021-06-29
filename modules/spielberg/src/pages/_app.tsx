@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import { ReactQueryDevtools } from "react-query/devtools";
 import ReactModal from "react-modal";
 import "../styles/globals.css";
 import AuthProvider from "../components/auth/AuthProvider";
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <AuthProvider>
             <Component {...pageProps} />
           </AuthProvider>
+          <ReactQueryDevtools />
         </QueryClientProvider>
       </div>
     </>

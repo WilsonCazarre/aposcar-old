@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from "react";
+import React from "react";
 
 const colorClassNames = {
   primary: "bg-yellow text-gray-800",

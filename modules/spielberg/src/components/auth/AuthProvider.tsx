@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../utils/constants";
 import jwtDecode from "jwt-decode";
-import { useMutation } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { kubrick } from "../../lib/apiClient";
+import { AxiosError, AxiosResponse } from "axios";
+import NProgress from "nprogress";
+import { User } from "../../lib/apiEntities";
 
 export interface UserTokenClaims {
   tokenType: "access" | "refresh";
@@ -12,37 +15,79 @@ export interface UserTokenClaims {
   name: string;
 }
 
+export interface UserToken {
+  access: string;
+  refresh: string;
+}
+
 export interface Auth {
-  user?: UserTokenClaims;
-  setUser: (newUser: UserTokenClaims | undefined) => void;
+  user?: User;
+  login: (credentials: LoginCredentials) => void;
+  logout: () => void;
 }
 
 export const AuthContext = React.createContext<Auth | undefined>(undefined);
 
+export interface LoginCredentials {
+  username: string;
+  password: string;
+}
+
 const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<UserTokenClaims | undefined>(undefined);
-  const refreshMutation = useMutation(() =>
-    kubrick.post("token/refresh/", {
-      refresh: localStorage.getItem(REFRESH_TOKEN_NAME),
-    })
+  const [user, setUser] = useState<User | undefined>(undefined);
+
+  const userQuery = useQuery<AxiosResponse<User>>(
+    ["users", user?.username],
+    () => kubrick.get("users/current_user/"),
+    { onSuccess: (response) => setUser(response.data), enabled: !!user }
+  );
+  const onLoginSuccess = async (response: AxiosResponse<UserToken>) => {
+    const { access, refresh } = response.data;
+    kubrick.defaults.headers["Authorization"] = `Bearer ${access}`;
+    const decoded = jwtDecode<UserTokenClaims>(access);
+    const date = new Date(decoded.exp * 1000);
+    setTimeout(
+      () => refreshMutation.mutate({ refresh }),
+      date.getTime() - new Date().getTime()
+    );
+    localStorage.setItem(ACCESS_TOKEN_NAME, access);
+    localStorage.setItem(REFRESH_TOKEN_NAME, refresh);
+    await userQuery.refetch();
+  };
+
+  const refreshMutation = useMutation(
+    (payload: { refresh: string }) => kubrick.post("token/refresh/", payload),
+    { onSuccess: onLoginSuccess }
   );
 
+  const loginMutation = useMutation<
+    AxiosResponse<UserToken>,
+    AxiosError,
+    LoginCredentials
+  >((credentials) => kubrick.post("token/", credentials), {
+    onMutate: NProgress.start,
+    onSettled: () => {
+      NProgress.done();
+    },
+    onSuccess: onLoginSuccess,
+  });
+
+  const logout = () => {
+    localStorage.removeItem(ACCESS_TOKEN_NAME);
+    localStorage.removeItem(REFRESH_TOKEN_NAME);
+    kubrick.defaults.headers["Authorization"] = undefined;
+    setUser(undefined);
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem(ACCESS_TOKEN_NAME);
-    if (token) {
-      const decoded = jwtDecode<UserTokenClaims>(token);
-      setUser(decoded);
+    const refresh = localStorage.getItem(REFRESH_TOKEN_NAME);
+    if (refresh) {
+      refreshMutation.mutate({ refresh });
     }
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      setTimeout(refreshMutation.mutate, user.exp);
-    }
-  }, [user, refreshMutation]);
-
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, login: loginMutation.mutate, logout }}>
       {children}
     </AuthContext.Provider>
   );
