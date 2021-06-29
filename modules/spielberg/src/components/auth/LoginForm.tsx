@@ -11,6 +11,7 @@ import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../utils/constants";
 import jwtDecode from "jwt-decode";
 import { UserTokenClaims } from "./AuthProvider";
 import { AxiosResponse } from "axios";
+import NProgress from "nprogress";
 
 interface Props {}
 
@@ -29,7 +30,10 @@ const LoginForm: React.FC<Props> = () => {
   const { setUser } = useAuth();
   const { register, handleSubmit } = useForm<FormFields>();
   const loginMutation = useMutation<AxiosResponse<Token>, unknown, FormFields>(
-    (payload) => kubrick.post("token/", payload),
+    (payload) => {
+      NProgress.start();
+      return kubrick.post("token/", payload);
+    },
     {
       onSuccess: (response) => {
         console.log(response);
@@ -38,6 +42,9 @@ const LoginForm: React.FC<Props> = () => {
         const decoded = jwtDecode<UserTokenClaims>(response.data.access);
         setUser(decoded);
         router.push("/");
+      },
+      onSettled: () => {
+        NProgress.done();
       },
     }
   );

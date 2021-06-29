@@ -14,7 +14,7 @@ export interface UserTokenClaims {
 
 export interface Auth {
   user?: UserTokenClaims;
-  setUser: (newUser: UserTokenClaims) => void;
+  setUser: (newUser: UserTokenClaims | undefined) => void;
 }
 
 export const AuthContext = React.createContext<Auth | undefined>(undefined);

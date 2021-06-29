@@ -23,7 +23,11 @@ const WinnersCard: React.FC<Props> = ({ categories }) => {
       childrenClassName="divide-y-2 p-0 divide-gray-700"
     >
       {categories.map((category) => (
-        <CategoryItem name={category.name} key={category.name} />
+        <CategoryItem
+          name={category.name}
+          key={category.name}
+          urlPath={category.urlField}
+        />
       ))}
     </Card>
   );

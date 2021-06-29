@@ -26,8 +26,13 @@ cd aposcar/spielberg
 yarn
 ```
 
-3 - Start the dev server
+3 - Create a `.env.local` file in the module `spielberg` root with this variables
+```bash
+NEXT_PUBLIC_KUBRICK_URL=https://aposcar.herokuapp.com/
 ```
+
+4 - Start the dev server
+```bash
 yarn dev
 ```
 

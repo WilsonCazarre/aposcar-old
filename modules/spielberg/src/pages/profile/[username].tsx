@@ -12,7 +12,7 @@ interface ProfilePageProps {
 const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
   return (
     <>
-      <MainLayout title={user.username}>
+      <MainLayout title={`Aposcar / ${user.username}`}>
         <div className="w-2/4 mx-auto space-y-4">
           <Card className="p-4">
             <div className="text-2xl">{user.username}</div>
@@ -32,9 +32,10 @@ export async function getServerSideProps({
 }: GetServerSidePropsContext): Promise<
   GetServerSidePropsResult<ProfilePageProps>
 > {
-  const response = await kubrick.get<User>(`users/${query.username}/`);
-  if (response.status === 404) {
+  try {
+    const response = await kubrick.get<User>(`users/${query.username}/`);
+    return { props: { user: response.data } };
+  } catch (e) {
     return { notFound: true };
   }
-  return { props: { user: response.data } };
 }

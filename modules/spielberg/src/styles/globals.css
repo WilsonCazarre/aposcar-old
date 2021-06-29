@@ -5,6 +5,10 @@
 @tailwind utilities;
 @tailwind variants;
 
+:root{
+  --accent-color: #FFDF36
+}
+
 button:focus, input:focus {
   outline: none;
 }
@@ -17,4 +21,23 @@ button:focus, input:focus {
 ::-webkit-scrollbar-thumb {
   background-color: gray;
   border-radius: 5px;
+}
+
+#nprogress {
+  position: relative;
+  z-index: 9999999;
+}
+
+#nprogress .bar {
+  background: var(--accent-color) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--accent-color),
+  0 0 5px var(--accent-color) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--accent-color) !important;
+  border-left-color: var(--accent-color) !important;
 }

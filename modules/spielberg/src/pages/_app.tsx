@@ -4,6 +4,19 @@ import "../styles/globals.css";
 import AuthProvider from "../components/auth/AuthProvider";
 import { QueryClient, QueryClientProvider } from "react-query";
 import React from "react";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import Router from "next/router";
+
+Router.events.on("routeChangeStart", () => {
+  NProgress.start();
+});
+Router.events.on("routeChangeComplete", () => {
+  NProgress.done();
+});
+Router.events.on("routeChangeError", () => {
+  NProgress.done();
+});
 
 ReactModal.setAppElement("#__next");
 
