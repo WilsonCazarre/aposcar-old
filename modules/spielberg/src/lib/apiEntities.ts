@@ -11,3 +11,9 @@ export interface User extends BaseEntity {
   bets: number[];
   score: number;
 }
+
+export interface Category extends BaseEntity {
+  name: string;
+  urlField: string;
+  indications: string[];
+}

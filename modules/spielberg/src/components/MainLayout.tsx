@@ -23,7 +23,7 @@ const MainLayout: React.FC<Props> = ({ children, title }) => {
       </Head>
       <div className="flex flex-col h-full">
         <Navbar />
-        <div className="flex-1 flex-grow mt-7">{children}</div>
+        <div className="mt-7 h-full flex-initial">{children}</div>
         <Footer />
       </div>
     </>

@@ -3,7 +3,6 @@ import ReactModal from "react-modal";
 import "../styles/globals.css";
 import AuthProvider from "../components/auth/AuthProvider";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Head from "next/head";
 import React from "react";
 
 ReactModal.setAppElement("#__next");
