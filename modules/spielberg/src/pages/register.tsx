@@ -3,12 +3,12 @@ import React from "react";
 import AuthLayout from "../components/auth/AuthLayout";
 import RegisterForm from "../components/auth/RegisterForm";
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   return (
-    <AuthLayout>
+    <AuthLayout pageTitle="Register">
       <RegisterForm />
     </AuthLayout>
   );
 };
 
-export default Login;
+export default Register;

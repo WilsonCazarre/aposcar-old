@@ -4,14 +4,14 @@ import Footer from "./Footer";
 import Head from "next/head";
 
 interface Props {
-  title?: string;
+  pageTitle?: string;
 }
 
-const MainLayout: React.FC<Props> = ({ children, title }) => {
+const MainLayout: React.FC<Props> = ({ children, pageTitle }) => {
   return (
     <>
       <Head>
-        <title>{title ?? "Aposcar"}</title>
+        <title>{pageTitle ?? "Aposcar"}</title>
         <meta
           name="description"
           content="Vote and compete with your friends to discover who knows more about the Academy Awards"

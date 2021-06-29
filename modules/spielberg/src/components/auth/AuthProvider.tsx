@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../utils/constants";
 import jwtDecode from "jwt-decode";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { kubrick } from "../../lib/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
 import NProgress from "nprogress";

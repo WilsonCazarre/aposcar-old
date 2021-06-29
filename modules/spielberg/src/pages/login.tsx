@@ -4,7 +4,7 @@ import AuthLayout from "../components/auth/AuthLayout";
 
 const Login: React.FC = () => {
   return (
-    <AuthLayout>
+    <AuthLayout pageTitle="Login">
       <LoginForm />
     </AuthLayout>
   );

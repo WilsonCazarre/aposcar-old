@@ -3,11 +3,11 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import MainLayout from "../../components/MainLayout";
 import Card from "../../components/Card";
 import CardHeader from "../../components/CardHeader";
-import { Category, Indication, User } from "../../lib/apiEntities";
+import { Category, Indication } from "../../lib/apiEntities";
 import { kubrick } from "../../lib/apiClient";
 import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
-import { useQuery, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import useAuth from "../../lib/useAuth";
 import useDefaultMutation from "../../lib/useDefaultMutation";
 
@@ -39,7 +39,7 @@ const CategoryDetail: React.FC<Props> = ({ category, indications }) => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout pageTitle={`${category.name}`}>
       <form className="px-10" onSubmit={handleSubmit(onSubmit)}>
         <Card header={<CardHeader>{category.name}</CardHeader>}>
           {indications?.map((indication) => (

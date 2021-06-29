@@ -3,8 +3,13 @@ import Card from "../Card";
 import AposcarLogo from "../../assets/icons/AposcarLogo";
 import useAuth from "../../lib/useAuth";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
-const AuthLayout: React.FC = ({ children }) => {
+interface Props {
+  pageTitle?: string;
+}
+
+const AuthLayout: React.FC<Props> = ({ children, pageTitle }) => {
   const router = useRouter();
   const { user } = useAuth();
 
@@ -16,6 +21,17 @@ const AuthLayout: React.FC = ({ children }) => {
 
   return (
     <div className="h-screen">
+      <Head>
+        <title>{pageTitle ?? "Aposcar"}</title>
+        <meta
+          name="description"
+          content="Vote and compete with your friends to discover who knows more about the Academy Awards"
+        />
+        <link
+          rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>"
+        />
+      </Head>
       <div className="w-96 py-24 mx-auto">
         <Card>
           <div className="pt-10 mx-auto">

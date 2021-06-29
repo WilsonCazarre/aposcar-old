@@ -12,7 +12,7 @@ interface ProfilePageProps {
 const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
   return (
     <>
-      <MainLayout title={`Aposcar / ${user.username}`}>
+      <MainLayout pageTitle={`Aposcar / ${user.username}`}>
         <div className="w-2/4 mx-auto space-y-4">
           <Card className="p-4">
             <div className="text-2xl">{user.username}</div>

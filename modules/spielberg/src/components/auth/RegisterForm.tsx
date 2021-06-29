@@ -1,6 +1,6 @@
 import React from "react";
 import InputWithIcon from "../forms/InputWithIcon";
-import { UserIcon, LockClosedIcon, MailIcon } from "@heroicons/react/outline";
+import { LockClosedIcon, MailIcon, UserIcon } from "@heroicons/react/outline";
 import Button from "../Button";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
