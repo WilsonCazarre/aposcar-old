@@ -60,7 +60,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def guess(self, request, username=None):
         try:
             new_indication = Indication.objects.get(
-                pk=request.data["indication_id"]
+                pk=request.data["indicationId"]
             )
         except Indication.DoesNotExist:
             return Response(
