@@ -63,7 +63,7 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Room
         fields = ["url", "id", "name", "owner", "users", "share_code"]
-        extra_kwargs = {"users": {"lookup_field": "username"}}
+        extra_kwargs = {"owner": {"read_only": True}}
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
