@@ -55,10 +55,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return value
 
 
-class RoomSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.HyperlinkedRelatedField(
-        read_only=True, view_name="userprofile-detail", lookup_field="username"
-    )
+class RoomSerializer(serializers.ModelSerializer):
     users = serializers.PrimaryKeyRelatedField(
         many=True, queryset=models.UserProfile.objects.all(), required=True
     )
