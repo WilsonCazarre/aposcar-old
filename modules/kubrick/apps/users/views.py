@@ -25,18 +25,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = models.UserProfile.objects.all()
+        ordering: str
 
-        ordering_query_sets = {
-            "score": models.UserProfile.objects.annotate(
-                score=Count("bets__is_winner")
-            ).order_by("-score"),
-            "-score": models.UserProfile.objects.annotate(
-                score=Count("bets__is_winner")
-            ).order_by("score"),
-        }
+        if room := self.request.query_params.get("room"):
+            queryset = models.Room.objects.get(pk=room).users.all()
 
         if ordering := self.request.query_params.get("ordering"):
-            return ordering_query_sets[ordering]
+            queryset = queryset.annotate(
+                score=Count("bets__is_winner")
+            ).order_by(ordering.strip("/"))
         return queryset
 
     @action(
