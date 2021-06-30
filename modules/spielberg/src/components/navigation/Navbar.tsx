@@ -1,10 +1,11 @@
 import React from "react";
-import AposcarLogo from "../assets/icons/AposcarLogo";
-import Button from "./Button";
+import AposcarLogo from "../../assets/icons/AposcarLogo";
+import Button from "../Button";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import useAuth from "../utils/useAuth";
+import useAuth from "../../utils/useAuth";
 import { LogoutIcon } from "@heroicons/react/outline";
+import ProfileButton from "./ProfileButton";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -23,12 +24,7 @@ const Navbar: React.FC = () => {
             <button onClick={logout}>
               <LogoutIcon className="text-white w-7 h-7 rotate-180" />
             </button>
-            <Button
-              color="primary"
-              onClick={() => router.push(`/profile/${loggedUser?.username}`)}
-            >
-              Go to profile
-            </Button>
+            <ProfileButton user={loggedUser} />
           </div>
         ) : (
           <Button color="primary" onClick={() => router.push("/register")}>

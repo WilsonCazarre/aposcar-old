@@ -8,6 +8,7 @@ import { useMutation } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
 import { User } from "../../utils/apiEntities";
+import useAuth from "../../utils/useAuth";
 
 interface Props {}
 
@@ -19,14 +20,15 @@ interface FormFields {
 
 const RegisterForm: React.FC<Props> = () => {
   const router = useRouter();
+  const { login } = useAuth();
   const { register, handleSubmit } = useForm<FormFields>();
   const registerMutation = useMutation<
     AxiosResponse<User>,
     AxiosError,
     FormFields
   >((payload) => kubrick.post("users/", payload), {
-    onSuccess: () => {
-      router.push("/login");
+    onSuccess: (_data, variables) => {
+      login({ username: variables.username, password: variables.password });
     },
   });
 

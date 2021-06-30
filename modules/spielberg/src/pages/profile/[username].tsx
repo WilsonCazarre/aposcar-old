@@ -14,9 +14,18 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
     <>
       <MainLayout pageTitle={`Aposcar / ${user.username}`}>
         <div className="w-2/4 mx-auto space-y-4">
-          <Card className="p-4">
-            <div className="text-2xl">{user.username}</div>
-            <div className="font-light">Playing since 2020</div>
+          <Card
+            className="p-4"
+            childrenClassName="flex items-center justify-between"
+          >
+            <div>
+              <div className="text-2xl">{user.username}</div>
+              <div className="font-light">Playing since 2020</div>
+            </div>
+            <div className="text-center w-20">
+              <div className="text-7xl">{user.score}</div>
+              <div className="leading-4">Total Aposcar Points </div>
+            </div>
           </Card>
         </div>
       </MainLayout>

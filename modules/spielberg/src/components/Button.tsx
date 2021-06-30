@@ -5,12 +5,13 @@ const colorClassNames = {
   secondary: "bg-gray-700 text-50",
 };
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   color: keyof typeof colorClassNames;
 }
 
-const Button: React.FC<Props> = ({ color, children, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ color, children, ...props }) => {
   const commonClassName = "py-1 px-6 text-center rounded";
   const { className, ...rest } = props;
 
