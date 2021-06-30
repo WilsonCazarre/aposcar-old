@@ -94,7 +94,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     )
     def join_room(self, request, pk=None):
         room_queryset: QuerySet[models.Room] = models.Room.objects.all()
-        room = room_queryset.get(share_code=request.data["share_code"])
+        room = room_queryset.get(share_code=request.data["shareCode"])
         if room.users.filter(pk=request.user.id).exists():
             return Response(
                 {"status": "user is already on the room"},
