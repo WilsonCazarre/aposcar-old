@@ -1,5 +1,5 @@
 from django.core.mail import EmailMultiAlternatives
-from django.db.models import Count
+from django.db.models import Count, QuerySet
 from django.dispatch import receiver
 
 from django.template.loader import render_to_string
@@ -87,16 +87,25 @@ class RoomViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-    @action(detail=True, methods=["POST"])
-    def add_user(self, request, username=None):
-        room = self.get_object()
-        users = models.UserProfile.objects.filter(pk__in=request.data["users"])
-        for user in users:
-            room.users.add(user.id)
-        return Response({"status": "new users added"})
+    @action(
+        detail=False,
+        methods=["POST"],
+        permission_classes=[permissions.IsAuthenticated],
+    )
+    def join_room(self, request, pk=None):
+        room_queryset: QuerySet[models.Room] = models.Room.objects.all()
+        room = room_queryset.get(share_code=request.data["share_code"])
+        if room.users.filter(pk=request.user.id).exists():
+            return Response(
+                {"status": "user is already on the room"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        room.users.add(request.user)
+        return Response({"status": "new user added"})
 
     @action(detail=True, methods=["POST"])
-    def remove_user(self, request, username=None):
+    def remove_user(self, request, pk=None):
         room = self.get_object()
         users = models.UserProfile.objects.filter(pk__in=request.data["users"])
         for user in users:
