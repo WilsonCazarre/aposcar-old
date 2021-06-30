@@ -85,9 +85,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         queryset = models.Room.objects.all()
 
         # The user can see all rooms that he owns or belongs to.
-        return queryset.filter(
-            users__in=[self.request.user]
-        ) | queryset.filter(owner=self.request.user)
+        return queryset.filter(users__in=[self.request.user])
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
