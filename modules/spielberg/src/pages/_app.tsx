@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import { ReactQueryDevtools } from "react-query/devtools";
-import ReactModal from "react-modal";
 import "../styles/globals.css";
+import ReactModal from "react-modal";
 import AuthProvider from "../components/auth/AuthProvider";
 import { QueryClient, QueryClientProvider } from "react-query";
 import React from "react";

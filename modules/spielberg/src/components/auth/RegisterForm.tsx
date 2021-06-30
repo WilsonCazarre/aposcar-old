@@ -5,9 +5,9 @@ import Button from "../Button";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { kubrick } from "../../lib/apiClient";
+import { kubrick } from "../../utils/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
-import { User } from "../../lib/apiEntities";
+import { User } from "../../utils/apiEntities";
 
 interface Props {}
 

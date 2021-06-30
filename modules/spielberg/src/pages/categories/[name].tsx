@@ -3,13 +3,13 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import MainLayout from "../../components/MainLayout";
 import Card from "../../components/Card";
 import CardHeader from "../../components/CardHeader";
-import { Category, Indication } from "../../lib/apiEntities";
-import { kubrick } from "../../lib/apiClient";
+import { Category, Indication } from "../../utils/apiEntities";
+import { kubrick } from "../../utils/apiClient";
 import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "react-query";
-import useAuth from "../../lib/useAuth";
-import useDefaultMutation from "../../lib/useDefaultMutation";
+import useAuth from "../../utils/useAuth";
+import useDefaultMutation from "../../utils/useDefaultMutation";
 
 interface Props {
   category: Category;
@@ -22,36 +22,38 @@ interface FormFields {
 
 const CategoryDetail: React.FC<Props> = ({ category, indications }) => {
   const { register, handleSubmit } = useForm<FormFields>();
-  const { user } = useAuth();
+  const { loggedUser } = useAuth();
   const queryClient = useQueryClient();
   const submitGuessMutation = useDefaultMutation<FormFields>(
-    `users/${user?.username}/guess/`,
+    `users/${loggedUser?.username}/guess/`,
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["users", user?.username]);
+        queryClient.invalidateQueries(["users", loggedUser?.username]);
       },
     }
   );
 
   const onSubmit = (data: FormFields) => {
-    console.log(data);
     submitGuessMutation.mutate(data);
   };
 
   return (
     <MainLayout pageTitle={`${category.name}`}>
       <form className="px-10" onSubmit={handleSubmit(onSubmit)}>
-        <Card header={<CardHeader>{category.name}</CardHeader>}>
+        <Card
+          header={<CardHeader>{category.name}</CardHeader>}
+          childrenClassName="p-4 text-lg"
+        >
           {indications?.map((indication) => (
             <div
               key={indication.id}
               className={`${
-                user?.bets.includes(indication.id) ? "text-yellow" : ""
+                loggedUser?.bets.includes(indication.id) ? "text-yellow" : ""
               }`}
             >
               <label>
                 {indication.nominated.name}{" "}
-                {user?.bets.includes(indication.id) && "(Your bet) "}
+                {loggedUser?.bets.includes(indication.id) && "(Your bet) "}
               </label>
               <input
                 type="radio"
@@ -61,11 +63,12 @@ const CategoryDetail: React.FC<Props> = ({ category, indications }) => {
             </div>
           ))}
           <Button
-            color={user ? "primary" : "secondary"}
+            color={loggedUser ? "primary" : "secondary"}
             type={"submit"}
-            disabled={!user}
+            disabled={!loggedUser}
+            className="mt-2"
           >
-            {user ? "Submit choice" : "Log in to submit a choice"}
+            {loggedUser ? "Submit choice" : "Log in to submit a choice"}
           </Button>
         </Card>
       </form>

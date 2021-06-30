@@ -23,7 +23,7 @@ const Card: React.FC<Props> = ({
       {...rest}
     >
       {header && (
-        <div className="border-b border-gray-700 p-2 pl-4">{header}</div>
+        <div className="border-b border-gray-700 p-2 px-4">{header}</div>
       )}
 
       {children && (

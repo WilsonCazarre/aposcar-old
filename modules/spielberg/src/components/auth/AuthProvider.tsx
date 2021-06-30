@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../utils/constants";
 import jwtDecode from "jwt-decode";
 import { useMutation, useQuery } from "react-query";
-import { kubrick } from "../../lib/apiClient";
+import { kubrick } from "../../utils/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
 import NProgress from "nprogress";
-import { User } from "../../lib/apiEntities";
+import { User } from "../../utils/apiEntities";
 
 export interface UserTokenClaims {
   tokenType: "access" | "refresh";
@@ -21,7 +21,7 @@ export interface UserToken {
 }
 
 export interface Auth {
-  user?: User;
+  loggedUser?: User;
   login: (credentials: LoginCredentials) => void;
   logout: () => void;
 }
@@ -87,7 +87,9 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login: loginMutation.mutate, logout }}>
+    <AuthContext.Provider
+      value={{ loggedUser: user, login: loginMutation.mutate, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

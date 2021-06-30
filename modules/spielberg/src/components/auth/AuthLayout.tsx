@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Card from "../Card";
 import AposcarLogo from "../../assets/icons/AposcarLogo";
-import useAuth from "../../lib/useAuth";
+import useAuth from "../../utils/useAuth";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -11,13 +11,13 @@ interface Props {
 
 const AuthLayout: React.FC<Props> = ({ children, pageTitle }) => {
   const router = useRouter();
-  const { user } = useAuth();
+  const { loggedUser } = useAuth();
 
   useEffect(() => {
-    if (user) {
+    if (loggedUser) {
       router.push("/");
     }
-  }, [router, user]);
+  }, [router, loggedUser]);
 
   return (
     <div className="h-screen">

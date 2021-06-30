@@ -31,3 +31,10 @@ export interface Indication extends BaseEntity {
   isWinner: boolean;
   annotation: string;
 }
+
+export interface Room extends BaseEntity {
+  name: string;
+  owner: string;
+  users: string[];
+  shareCode: string;
+}

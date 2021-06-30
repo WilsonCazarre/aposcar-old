@@ -3,7 +3,7 @@ import InputWithIcon from "../forms/InputWithIcon";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/outline";
 import Button from "../Button";
 import { useRouter } from "next/router";
-import useAuth from "../../lib/useAuth";
+import useAuth from "../../utils/useAuth";
 import { useForm } from "react-hook-form";
 import { LoginCredentials } from "./AuthProvider";
 

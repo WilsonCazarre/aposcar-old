@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../Card";
 import CardHeader from "../CardHeader";
-import { Category } from "../../lib/apiEntities";
+import { Category } from "../../utils/apiEntities";
 import CategoryItem from "./CategoryItem";
 
 interface Props {
@@ -13,7 +13,7 @@ const WinnersCard: React.FC<Props> = ({ categories }) => {
     <Card
       header={
         <CardHeader>
-          <div className="grid grid-cols-4 pr-3">
+          <div className="grid grid-cols-4 pr-1">
             <span className="col-span-2">Categories</span>
             <span className="text-center font-light">Winner</span>
             <span className="text-right font-light">Your bet</span>

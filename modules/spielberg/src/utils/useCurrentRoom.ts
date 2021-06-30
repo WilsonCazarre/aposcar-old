@@ -4,6 +4,6 @@ import {
   RoomContextProps,
 } from "../components/scoreboard/RoomProvider";
 
-export default function useCurrentRoomId() {
+export default function useCurrentRoom() {
   return useContext(RoomContext) as RoomContextProps;
 }

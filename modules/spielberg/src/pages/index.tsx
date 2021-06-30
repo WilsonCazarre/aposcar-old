@@ -1,25 +1,25 @@
 import React from "react";
 import MainLayout from "../components/MainLayout";
-import Card from "../components/Card";
-import CardHeader from "../components/CardHeader";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { kubrick } from "../lib/apiClient";
-import { Category } from "../lib/apiEntities";
+import { kubrick } from "../utils/apiClient";
+import { Category } from "../utils/apiEntities";
 import WinnersCard from "../components/winners/WinnersCard";
+import ScoreboardCard from "../components/scoreboard/ScoreboardCard";
+import RoomProvider from "../components/scoreboard/RoomProvider";
 
 export interface Props {
   categories: Category[];
 }
+
 const Home: React.FC<Props> = ({ categories }) => {
   return (
     <>
       <main className="h-full">
         <MainLayout>
           <div className="grid grid-cols-1 p-10 pt-0 gap-7 h-full md:grid-cols-2">
-            <Card
-              header={<CardHeader>Global Ranking</CardHeader>}
-              className="h-full"
-            />
+            <RoomProvider>
+              <ScoreboardCard />
+            </RoomProvider>
             <WinnersCard categories={categories} />
           </div>
         </MainLayout>

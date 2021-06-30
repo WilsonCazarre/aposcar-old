@@ -1,5 +1,5 @@
 import axios from "axios";
-import { KUBRICK_URL } from "../utils/constants";
+import { KUBRICK_URL } from "./constants";
 
 export const kubrick = axios.create({
   baseURL: KUBRICK_URL,
