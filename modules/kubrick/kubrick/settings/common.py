@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     "drf_yasg",
     "django_rest_passwordreset",
     "corsheaders",
-    "rest_framework.authtoken",
     "django_filters",
     "apps.core",
     "apps.awards",

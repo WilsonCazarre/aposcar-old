@@ -104,13 +104,17 @@ class RoomViewSet(viewsets.ModelViewSet):
         room.users.add(request.user)
         return Response({"status": "new user added"})
 
-    @action(detail=True, methods=["POST"])
+    @action(
+        detail=True,
+        methods=["POST"],
+        permission_classes=[permissions.IsAuthenticated],
+    )
     def remove_user(self, request, pk=None):
         room = self.get_object()
         user_to_remove = models.UserProfile.objects.get(
             username=request.data["username"]
         )
-        is_room_owner = room.owner == request.owner
+        is_room_owner = room.owner == request.user
         if room.owner == user_to_remove:
             return Response({"status": "You can't remove the owner of a room"})
 
