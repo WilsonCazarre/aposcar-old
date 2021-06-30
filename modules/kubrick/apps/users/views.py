@@ -107,10 +107,20 @@ class RoomViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=["POST"])
     def remove_user(self, request, pk=None):
         room = self.get_object()
-        users = models.UserProfile.objects.filter(pk__in=request.data["users"])
-        for user in users:
-            room.users.remove(user.id)
-        return Response({"status": "users removed"})
+        user_to_remove = models.UserProfile.objects.get(
+            pk=request.data["username"]
+        )
+        is_room_owner = room.owner == request.owner
+        if room.owner == user_to_remove:
+            return Response({"status": "You can't remove the owner of a room"})
+
+        if (user_to_remove != request.user) and is_room_owner:
+            return Response(
+                {"status": "you don't have permission to remove this user"}
+            )
+
+        room.users.remove(user_to_remove)
+        return Response({"status": "user removed"})
 
     @action(detail=True, methods=["PATCH"])
     def renew_code(self, request, pk=None):
