@@ -59,6 +59,9 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.HyperlinkedRelatedField(
         read_only=True, view_name="userprofile-detail", lookup_field="username"
     )
+    users = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=models.UserProfile.objects.all(), required=True
+    )
 
     class Meta:
         model = models.Room
