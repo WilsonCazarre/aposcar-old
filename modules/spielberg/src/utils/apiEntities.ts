@@ -34,7 +34,7 @@ export interface Indication extends BaseEntity {
 
 export interface Room extends BaseEntity {
   name: string;
-  owner: string;
+  owner: number;
   users: string[];
   shareCode: string;
 }

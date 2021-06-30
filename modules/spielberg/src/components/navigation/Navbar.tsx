@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
       <div>
         {loggedUser ? (
           <div className="flex items-center space-x-4">
-            <button onClick={logout}>
+            <button onClick={logout} title="Logout">
               <LogoutIcon className="text-white w-7 h-7 rotate-180" />
             </button>
             <ProfileButton user={loggedUser} />

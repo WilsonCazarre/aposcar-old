@@ -15,6 +15,7 @@ const ProfileButton: React.FC<Props> = ({ user, ...props }) => {
     <div className="flex items-center">
       <Button
         {...props}
+        title="Go to Profile"
         color="primary"
         onClick={() => router.push(`/profile/${user.username}`)}
         className="rounded-none rounded-l-full py-0.5 px-5"

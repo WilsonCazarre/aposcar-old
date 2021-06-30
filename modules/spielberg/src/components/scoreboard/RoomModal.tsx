@@ -9,6 +9,10 @@ import { Room } from "../../utils/apiEntities";
 import RoomItem from "./RoomItem";
 import useCurrentRoom from "../../utils/useCurrentRoom";
 import { AxiosError, AxiosResponse } from "axios";
+import CreateRoomForm from "./CreateRoomForm";
+import RoomsList from "./RoomsList";
+import { set } from "react-hook-form";
+import useAuth from "../../utils/useAuth";
 
 interface Props {
   isModalOpen: boolean;
@@ -20,10 +24,14 @@ interface FormFields {
 }
 
 const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
-  const { data: rooms, refetch } = useQuery("rooms", () =>
-    kubrick.get<Room[]>("rooms/")
+  const { loggedUser } = useAuth();
+  const { data: rooms, refetch } = useQuery(
+    "rooms",
+    () => kubrick.get<Room[]>("rooms/"),
+    { enabled: !!loggedUser }
   );
   const { setRoom } = useCurrentRoom();
+  const [isCreatingRoom, setIsCreatingRoom] = useState(false);
 
   const setNewRoom = (room: Room) => {
     setIsModalOpen(false);
@@ -51,28 +59,40 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
       isOpen={isModalOpen}
       onRequestClose={() => setIsModalOpen(false)}
     >
-      <div className="flex space-x-4 justify-end p-4">
-        <InputWithIcon
-          HeroIcon={SearchIcon}
-          size={8}
-          value={shareCode}
-          onChange={(e) => setShareCode(e.target.value)}
-        />
+      <div className="flex space-x-4 justify-between p-4">
         <Button
-          color="primary"
-          onClick={() => joinRoomMutation.mutate({ shareCode })}
+          color="secondary"
+          onClick={() => setIsCreatingRoom(!isCreatingRoom)}
         >
-          Add
+          {isCreatingRoom ? "Go back to rooms list" : "Create new room"}
         </Button>
+        <div className="flex justify-end items-center">
+          <InputWithIcon
+            HeroIcon={SearchIcon}
+            size={10}
+            value={shareCode}
+            placeholder="Share code"
+            onChange={(e) => setShareCode(e.target.value)}
+          />
+          <Button
+            color="primary"
+            onClick={() => joinRoomMutation.mutate({ shareCode })}
+          >
+            Join
+          </Button>
+        </div>
       </div>
       <div>
-        {rooms?.data.map((room) => (
-          <RoomItem
-            key={room.id}
-            room={room}
-            onClick={() => setNewRoom(room)}
+        {isCreatingRoom ? (
+          <CreateRoomForm
+            afterCreation={() => {
+              refetch();
+              setIsCreatingRoom(false);
+            }}
           />
-        ))}
+        ) : (
+          <RoomsList setNewRoom={setNewRoom} rooms={rooms?.data} />
+        )}
       </div>
     </Modal>
   );
