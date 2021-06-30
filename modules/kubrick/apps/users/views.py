@@ -36,7 +36,7 @@ class UserViewSet(viewsets.ModelViewSet):
         }
 
         if ordering := self.request.query_params.get("ordering"):
-            return ordering_query_sets["score"]
+            return ordering_query_sets[ordering]
         return queryset
 
     @action(
@@ -93,7 +93,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     @action(detail=True, methods=["POST"])
-    def add_user(self, request, pk=None):
+    def add_user(self, request, username=None):
         room = self.get_object()
         users = models.UserProfile.objects.filter(pk__in=request.data["users"])
         for user in users:
@@ -101,7 +101,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         return Response({"status": "new users added"})
 
     @action(detail=True, methods=["POST"])
-    def remove_user(self, request, pk=None):
+    def remove_user(self, request, username=None):
         room = self.get_object()
         users = models.UserProfile.objects.filter(pk__in=request.data["users"])
         for user in users:

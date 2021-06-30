@@ -12,22 +12,31 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.UserProfile
-        fields = ['url', 'id', 'username', 'email', 'date_joined',
-                  'profile_picture', 'bets', 'score', 'password']
+        fields = [
+            "url",
+            "id",
+            "username",
+            "email",
+            "date_joined",
+            "profile_picture",
+            "bets",
+            "score",
+            "password",
+        ]
         extra_kwargs = {
-            'password': {'write_only': True},
-            'date_joined': {'read_only': True},
-            'url': {'lookup_field': 'username'}
+            "password": {"write_only": True},
+            "date_joined": {"read_only": True},
+            "url": {"lookup_field": "username"},
         }
 
     def create(self, validated_data):
         user = super().create(validated_data)
-        user.set_password(validated_data['password'])
+        user.set_password(validated_data["password"])
         user.save()
         return user
 
     def update(self, instance, validated_data):
-        password = validated_data.pop('password')
+        password = validated_data.pop("password")
         instance.set_password(password)
         return super().update(instance, validated_data)
 
@@ -48,12 +57,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.HyperlinkedRelatedField(
-        read_only=True, view_name='userprofile-detail'
+        read_only=True, view_name="userprofile-detail", lookup_field="username"
     )
 
     class Meta:
         model = models.Room
-        fields = ['url', 'id', 'name', 'owner', 'users', 'share_code']
+        fields = ["url", "id", "name", "owner", "users", "share_code"]
+        extra_kwargs = {"users": {"lookup_field": "username"}}
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -61,6 +71,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user: models.UserProfile):
         token = super().get_token(user)
 
-        token['name'] = user.username
+        token["name"] = user.username
 
         return token
