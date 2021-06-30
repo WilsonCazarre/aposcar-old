@@ -116,11 +116,15 @@ class RoomViewSet(viewsets.ModelViewSet):
         )
         is_room_owner = room.owner == request.user
         if room.owner == user_to_remove:
-            return Response({"status": "You can't remove the owner of a room"})
+            return Response(
+                {"status": "You can't remove the owner of a room"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
         if (user_to_remove != request.user) and is_room_owner:
             return Response(
-                {"status": "you don't have permission to remove this user"}
+                {"status": "you don't have permission to remove this user"},
+                status=status.HTTP_403_FORBIDDEN,
             )
 
         room.users.remove(user_to_remove)
