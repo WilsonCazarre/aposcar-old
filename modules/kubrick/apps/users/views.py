@@ -108,7 +108,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     def remove_user(self, request, pk=None):
         room = self.get_object()
         user_to_remove = models.UserProfile.objects.get(
-            pk=request.data["username"]
+            username=request.data["username"]
         )
         is_room_owner = room.owner == request.owner
         if room.owner == user_to_remove:
