@@ -3,7 +3,6 @@ import CardHeader from "../CardHeader";
 import {
   SwitchHorizontalIcon,
   GlobeAltIcon,
-  StarIcon,
   LogoutIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
