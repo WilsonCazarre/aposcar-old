@@ -4,14 +4,13 @@ from .common import *
 DEBUG = False
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ORIGIN_WHITELIST = ["https://aposcar.vercel.app", "http://localhost:3000"]
+CORS_ORIGIN_WHITELIST = ["https://aposcar.games", "http://localhost:3000"]
 
 
 ADMINS = [("Wilson Cazarré", "labqu4tro@gmail.com")]
 
 ALLOWED_HOSTS = [
-    "aposcar.herokuapp.com",
-    "aposcar.vercel.app",
+    ".aposcar.games",
     "localhost",
 ]
 
