@@ -9,7 +9,6 @@
 ## About this folder
 `kubrick` is our REST API built on [Django REST Framework](https://www.django-rest-framework.org/)
 
-
 ## How to run this module
 
 We're using pipenv for this project, make sure to [install it](https://github.com/pypa/pipenv#installation).
@@ -18,7 +17,7 @@ We're using pipenv for this project, make sure to [install it](https://github.co
 1 - Clone the project and navigate to the folder:
 ```bash
 git clone https://github.com/lab-quatro/aposcar.git
-cd aposcar\kubrick
+cd aposcar\modules\kubrick
 ```
 
 2 - Create the virtual environment and install the dependencies
@@ -33,13 +32,10 @@ pipenv install
 pipenv shell
 ```
 
-4 - Create a `.env` file in the module root with this content
+4 - Create a `.env` file in the module root with the following content (this settings are for development mode):
 ```dotenv
-SECRET_KEY="Your django secret key"
-
-CSRF_COOKIE_SECURE="False"
-DEBUG="True"
-SECURE_SSL_REDIRECT="False"
+DJANGO_ENVIRONMENT=dev
+SECRET_KEY="your django secret key"
 ```
 
 5 - Execute the initial schema migrations
@@ -52,7 +48,7 @@ python manage.py migrate
 python manage.py loaddata initial_data/*
 ```
 
-7 - Create a user to work with
+7 - Create your user
 ```
 python manage.py createsuperuser
 ```
