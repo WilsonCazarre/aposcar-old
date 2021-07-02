@@ -7,13 +7,45 @@
 </p>
 <hr>
 
-## Codebase
-| Module                |      Description          |
-| :-------------------- | :-----------------------: |
-| [kubrick](modules/kubrick) | Django REST Framework API |
-| [spielberg](modules/spielberg) | React CRA frontend |
+## What is this project about?
 
-## Branches
+Aposcar is a website where you and your friends can guess the winner of each category in the Oscar, 
+and see where you stand among another players and your friends as well.
+
+### Features
+
+- See all the Oscar Nominations and winners
+- Create your profile to guess the winner for each category
+- Create and join rooms with your friends to get a custom rank
+
+### Why?
+
+This project actually started as a joke. A few months before the Oscar 2020, me and my friend had the idea to bet who could get more winners right.
+We called some other friends and made it a personal game of ours. So last year we had the idea of making it more a serious thing, 
+so other people can participate with their friends.
+
+
+## Contributing
+
+<!---
+Todo: add CONTRIBUITING.md and linking it here
+-->
+
+**If you don't know how to code**. There's somethings that you still do to help us, the most direct way is donate into our [ko-fi](https://ko-fi.com/labquatro). 
+If you never built a website, it takes time and money, so any help is very welcome.
+In the future we are planning to make Aposcar available in different languages, so if you don't know how to code, you can still help us with translating the project :)
+
+### Codebase
+
+This is a monorepo, all diferent projects related to Aposcar should live inside the `modules` folder.
+Inside each folder there's a `README.md` explaning in more detail each module.
+
+|           Module               |       Description         |
+| :----------------------------: | :-----------------------: |
+| [kubrick](modules/kubrick)     | Django REST Framework API |
+| [spielberg](modules/spielberg) | React Next.js frontend    |
+
+### Branches
 
 `main`-> This is our production branch
 
@@ -21,8 +53,6 @@
 
 
 ## Other important resources
-
-[Trello Board](https://trello.com/b/2qTivVAN/aposcar)
 
 [Figma File](https://www.figma.com/file/bmENvd6vo98Z8MPkvJK8e2/Aposcar?node-id=0%3A1)
 
