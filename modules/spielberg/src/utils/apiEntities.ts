@@ -1,5 +1,4 @@
 export interface BaseEntity {
-  url: string;
   id: number;
 }
 
@@ -15,7 +14,7 @@ export interface User extends BaseEntity {
 export interface Category extends BaseEntity {
   name: string;
   urlField: string;
-  indications: string[];
+  indications: number[];
 }
 
 export interface Nominee extends BaseEntity {

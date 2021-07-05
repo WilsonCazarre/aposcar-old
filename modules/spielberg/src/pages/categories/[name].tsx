@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { useQueryClient } from "react-query";
 import useAuth from "../../utils/useAuth";
 import useDefaultMutation from "../../utils/useDefaultMutation";
+import { KUBRICK_URL } from "../../utils/constants";
 
 interface Props {
   category: Category;
@@ -88,7 +89,7 @@ export async function getServerSideProps(
 
     const indications = await Promise.all(
       category.data.indications.map((indication) =>
-        kubrick.get<Indication>(indication)
+        kubrick.get<Indication>(`indications/${indication}/`)
       )
     );
 

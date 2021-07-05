@@ -55,11 +55,6 @@ const AuthProvider: React.FC = ({ children }) => {
     await userQuery.refetch();
   };
 
-  const refreshMutation = useMutation(
-    (payload: { refresh: string }) => kubrick.post("token/refresh/", payload),
-    { onSuccess: onLoginSuccess }
-  );
-
   const loginMutation = useMutation<
     AxiosResponse<UserToken>,
     AxiosError,
@@ -79,11 +74,17 @@ const AuthProvider: React.FC = ({ children }) => {
     setUser(undefined);
   };
 
+  const refreshMutation = useMutation(
+    (payload: { refresh: string }) => kubrick.post("token/refresh/", payload),
+    { onSuccess: onLoginSuccess, onError: logout }
+  );
+
   useEffect(() => {
     const refresh = localStorage.getItem(REFRESH_TOKEN_NAME);
     if (refresh) {
       refreshMutation.mutate({ refresh });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
