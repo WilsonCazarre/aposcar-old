@@ -4,7 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from apps.users import models
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     bets = serializers.PrimaryKeyRelatedField(
         many=True, queryset=models.Indication.objects.all(), required=False
     )
@@ -13,7 +13,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.UserProfile
         fields = [
-            "url",
             "id",
             "username",
             "email",
@@ -26,7 +25,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         extra_kwargs = {
             "password": {"write_only": True},
             "date_joined": {"read_only": True},
-            "url": {"lookup_field": "username"},
         }
 
     def create(self, validated_data):
@@ -62,7 +60,7 @@ class RoomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Room
-        fields = ["url", "id", "name", "owner", "users", "share_code"]
+        fields = ["id", "name", "owner", "users", "share_code"]
         extra_kwargs = {"owner": {"read_only": True}}
 
 
