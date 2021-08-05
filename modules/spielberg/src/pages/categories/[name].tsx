@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { useQueryClient } from "react-query";
 import useAuth from "../../utils/useAuth";
 import useDefaultMutation from "../../utils/useDefaultMutation";
-import { KUBRICK_URL } from "../../utils/constants";
 
 interface Props {
   category: Category;

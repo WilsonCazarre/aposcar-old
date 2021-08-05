@@ -66,7 +66,7 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
         >
           {isCreatingRoom ? "Go back to rooms list" : "Create new room"}
         </Button>
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-center space-x-2">
           <InputWithIcon
             HeroIcon={SearchIcon}
             size={10}

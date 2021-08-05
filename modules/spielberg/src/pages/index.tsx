@@ -14,16 +14,14 @@ export interface Props {
 const Home: React.FC<Props> = ({ categories }) => {
   return (
     <>
-      <main className="h-full">
-        <MainLayout>
-          <div className="grid grid-cols-1 p-10 pt-0 gap-7 h-full md:grid-cols-2">
-            <RoomProvider>
-              <ScoreboardCard />
-            </RoomProvider>
-            <WinnersCard categories={categories} />
-          </div>
-        </MainLayout>
-      </main>
+      <MainLayout>
+        <div className="grid grid-cols-1 p-10 pt-0 gap-7 h-full md:grid-cols-2">
+          <RoomProvider>
+            <ScoreboardCard />
+          </RoomProvider>
+          <WinnersCard categories={categories} />
+        </div>
+      </MainLayout>
     </>
   );
 };
