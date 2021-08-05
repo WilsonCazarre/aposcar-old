@@ -31,9 +31,9 @@ so other people can participate with their friends.
 Todo: add CONTRIBUITING.md and linking it here
 -->
 
-**If you don't know how to code**. There's somethings that you still do to help us, the most direct way is donate into our [ko-fi](https://ko-fi.com/labquatro). 
+**If you don't know how to code**. There's still things to do that will help us, the most direct way is to donate into our [ko-fi](https://ko-fi.com/labquatro). 
 If you never built a website, it takes time and money, so any help is very welcome.
-In the future we are planning to make Aposcar available in different languages, so if you don't know how to code, you can still help us with translating the project :)
+In the future we are planning to make Aposcar available in different languages, so if you don't know how to code, you can still help us to translate the project :)
 
 ### Codebase
 
