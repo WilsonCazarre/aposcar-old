@@ -13,13 +13,14 @@ export interface ButtonProps
 
 const Button: React.FC<ButtonProps> = ({ color, children, ...props }) => {
   const commonClassName = "py-1 px-6 text-center rounded";
-  const { className, ...rest } = props;
+  const { className, disabled, ...rest } = props;
 
   return (
     <button
       className={`${commonClassName} ${colorClassNames[color]} ${
         className ?? ""
-      }`}
+      } ${disabled ? "cursor-not-allowed" : ""}`}
+      disabled={disabled}
       {...rest}
     >
       {children}

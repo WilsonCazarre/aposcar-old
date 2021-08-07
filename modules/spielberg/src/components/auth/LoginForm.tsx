@@ -17,7 +17,11 @@ export interface Token {
 const LoginForm: React.FC<Props> = () => {
   const router = useRouter();
   const { login } = useAuth();
-  const { register, handleSubmit } = useForm<LoginCredentials>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginCredentials>();
 
   const onSubmit = (fields: LoginCredentials) => {
     login(fields);
@@ -29,13 +33,15 @@ const LoginForm: React.FC<Props> = () => {
         <InputWithIcon
           HeroIcon={UserIcon}
           placeholder="username"
-          {...register("username")}
+          errors={errors.username}
+          {...register("username", { required: true })}
         />
         <InputWithIcon
           HeroIcon={LockClosedIcon}
           placeholder="password"
           type="password"
-          {...register("password")}
+          errors={errors.password}
+          {...register("password", { required: true })}
         />
       </div>
       <div className="grid grid-cols-2 gap-2 mt-16">

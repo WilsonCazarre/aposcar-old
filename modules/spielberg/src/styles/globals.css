@@ -16,6 +16,7 @@ button:focus, input:focus {
 ::-webkit-scrollbar {
   background-color: transparent;
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -40,4 +41,8 @@ button:focus, input:focus {
 #nprogress .spinner-icon {
   border-top-color: var(--accent-color) !important;
   border-left-color: var(--accent-color) !important;
+}
+
+.strip-path {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 62%, 0 100%);
 }

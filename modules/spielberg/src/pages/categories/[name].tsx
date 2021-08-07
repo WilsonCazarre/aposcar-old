@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Image from "next/image";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import MainLayout from "../../components/MainLayout";
 import Card from "../../components/Card";
@@ -10,18 +11,29 @@ import { useForm } from "react-hook-form";
 import { useQueryClient } from "react-query";
 import useAuth from "../../utils/useAuth";
 import useDefaultMutation from "../../utils/useDefaultMutation";
+import { StarIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 
 interface Props {
   category: Category;
   indications?: Indication[];
+  nextCategory?: string | null;
+  previousCategory?: string | null;
 }
 
 interface FormFields {
   indicationId: number;
 }
 
-const CategoryDetail: React.FC<Props> = ({ category, indications }) => {
-  const { register, handleSubmit } = useForm<FormFields>();
+const CategoryDetail: React.FC<Props> = ({
+  category,
+  indications,
+  nextCategory,
+  previousCategory,
+}) => {
+  const { register, handleSubmit, watch } = useForm<FormFields>();
+  const { indicationId } = watch();
+  const router = useRouter();
   const { loggedUser } = useAuth();
   const queryClient = useQueryClient();
   const submitGuessMutation = useDefaultMutation<FormFields>(
@@ -33,45 +45,84 @@ const CategoryDetail: React.FC<Props> = ({ category, indications }) => {
     }
   );
 
-  const onSubmit = (data: FormFields) => {
-    submitGuessMutation.mutate(data);
-  };
+  useEffect(() => {
+    console.log({ previousCategory, nextCategory });
+  }, [previousCategory, nextCategory]);
 
   return (
     <MainLayout pageTitle={`${category.name}`}>
-      <form className="px-10" onSubmit={handleSubmit(onSubmit)}>
+      <div className="px-10">
         <Card
           header={<CardHeader>{category.name}</CardHeader>}
           childrenClassName="p-4 text-lg"
         >
-          {indications?.map((indication) => (
-            <div
-              key={indication.id}
-              className={`${
-                loggedUser?.bets.includes(indication.id) ? "text-yellow" : ""
-              }`}
+          <div className="flex space-x-4 mr-4 rounded-md overflow-y-auto">
+            {indications?.map((indication) => (
+              <div
+                key={indication.id}
+                className="cursor-pointer"
+                onClick={() =>
+                  submitGuessMutation.mutate({ indicationId: indication.id })
+                }
+              >
+                <label
+                  className={`block cursor-pointer relative flex-1 transition-colors border-2 ${
+                    indicationId == indication.id
+                      ? "border-yellow"
+                      : "border-transparent"
+                  }`}
+                >
+                  {loggedUser?.bets.includes(indication.id) && (
+                    <span
+                      className="absolute z-10 bg-yellow h-10 shadow-lg strip-path right-2"
+                      title="Your current choice"
+                    >
+                      <StarIcon className=" h-5 w-5 text-gray-900" />
+                    </span>
+                  )}
+                  <Image
+                    src={indication.nominated.pictureUrl}
+                    width={170}
+                    height={253}
+                    quality={50}
+                    layout={"fixed"}
+                    alt={indication.nominated.name}
+                  />
+                  <input
+                    type="radio"
+                    className="hidden"
+                    {...register("indicationId")}
+                    value={indication.id}
+                  />
+                </label>
+                <div
+                  className={`text-center font-bold text-sm ${
+                    indicationId == indication.id ? "text-yellow" : ""
+                  }`}
+                >
+                  {indication.nominated.name}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-between mt-2">
+            <Button
+              color={previousCategory ? "primary" : "secondary"}
+              disabled={!previousCategory}
+              onClick={() => router.push(`/categories/${previousCategory}/`)}
             >
-              <label>
-                {indication.nominated.name}{" "}
-                {loggedUser?.bets.includes(indication.id) && "(Your bet) "}
-              </label>
-              <input
-                type="radio"
-                {...register("indicationId")}
-                value={indication.id}
-              />
-            </div>
-          ))}
-          <Button
-            color={loggedUser ? "primary" : "secondary"}
-            type={"submit"}
-            disabled={!loggedUser}
-            className="mt-2"
-          >
-            {loggedUser ? "Submit choice" : "Log in to submit a choice"}
-          </Button>
+              Previous
+            </Button>
+            <Button
+              color={nextCategory ? "primary" : "secondary"}
+              disabled={!nextCategory}
+              onClick={() => router.push(`/categories/${nextCategory}/`)}
+            >
+              Next
+            </Button>
+          </div>
         </Card>
-      </form>
+      </div>
     </MainLayout>
   );
 };
@@ -82,20 +133,34 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> {
   try {
-    const category = await kubrick.get<Category>(
-      `categories/${context.query.name}`
+    const categories = await kubrick.get<Category[]>("categories/");
+    const categoryIdx = categories.data.findIndex(
+      (c) => c.urlField === context.query.name
     );
-
+    console.log(categories.data);
+    if (categoryIdx === -1) {
+      return { notFound: true };
+    }
     const indications = await Promise.all(
-      category.data.indications.map((indication) =>
+      categories.data[categoryIdx].indications.map((indication) =>
         kubrick.get<Indication>(`indications/${indication}/`)
       )
     );
 
+    const previousCategory =
+      categoryIdx - 1 >= 0 ? categories.data[categoryIdx - 1].urlField : null;
+
+    const nextCategory =
+      categoryIdx + 1 < categories.data.length - 1
+        ? categories.data[categoryIdx + 1].urlField
+        : null;
+
     return {
       props: {
-        category: category.data,
+        category: categories.data[categoryIdx],
         indications: indications.map((res) => res.data),
+        nextCategory: nextCategory,
+        previousCategory: previousCategory,
       },
     };
   } catch (e) {

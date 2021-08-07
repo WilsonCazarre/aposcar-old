@@ -17,7 +17,7 @@ const Card: React.FC<Props> = ({
 
   return (
     <div
-      className={`flex flex-col bg-gray-800 border border-gray-700 rounded-xl max-h-[70vh] ${
+      className={`flex flex-col bg-gray-800 border border-gray-700 rounded-xl max-h-[72vh] ${
         className ?? ""
       }`}
       {...rest}

@@ -18,11 +18,15 @@ const UserRank: React.FC<Props> = ({ user, userIdx }) => {
       }`}
     >
       <div className="flex justify-between">
-        <span className="text-xl">
+        <div className="text-xl flex">
           {`${userIdx + 1}° `}
-          <Link href={`profile/${user.username}`}>{user.username}</Link>
-        </span>
-        <span>{user.score} / 24</span>
+          <div className="truncate w-40 ml-1">
+            <Link href={`profile/${user.username}`} passHref>
+              {user.username}
+            </Link>
+          </div>
+        </div>
+        <div>{user.score} / 24</div>
       </div>
       <ScoreBar score={user.score} />
     </div>
