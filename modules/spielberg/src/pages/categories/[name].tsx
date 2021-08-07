@@ -31,7 +31,7 @@ const CategoryDetail: React.FC<Props> = ({
   nextCategory,
   previousCategory,
 }) => {
-  const { register, handleSubmit, watch } = useForm<FormFields>();
+  const { register, watch } = useForm<FormFields>();
   const { indicationId } = watch();
   const router = useRouter();
   const { loggedUser } = useAuth();
@@ -58,16 +58,22 @@ const CategoryDetail: React.FC<Props> = ({
         >
           <div className="flex space-x-4 mr-4 rounded-md overflow-y-auto">
             {indications?.map((indication) => (
-              <div
+              <button
                 key={indication.id}
-                className="cursor-pointer"
+                className="block"
                 onClick={() =>
                   submitGuessMutation.mutate({ indicationId: indication.id })
+                }
+                disabled={!loggedUser}
+                title={
+                  loggedUser
+                    ? "Click to submit guess"
+                    : "Log in to submit a guess"
                 }
               >
                 <label
                   className={`block cursor-pointer relative flex-1 transition-colors border-2 ${
-                    indicationId == indication.id
+                    indicationId == indication.id && !!loggedUser
                       ? "border-yellow"
                       : "border-transparent"
                   }`}
@@ -97,12 +103,14 @@ const CategoryDetail: React.FC<Props> = ({
                 </label>
                 <div
                   className={`text-center font-bold text-sm ${
-                    indicationId == indication.id ? "text-yellow" : ""
+                    indicationId == indication.id && !!loggedUser
+                      ? "text-yellow"
+                      : "text-white"
                   }`}
                 >
                   {indication.nominated.name}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
           <div className="flex justify-between mt-2">
