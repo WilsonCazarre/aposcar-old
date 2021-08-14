@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { AnnotationIcon } from "@heroicons/react/outline";
 import InputWithIcon from "../forms/InputWithIcon";
 import { useMutation } from "react-query";
@@ -18,7 +18,7 @@ interface FormFields {
 }
 
 const CreateRoomForm: React.FC<Props> = ({ afterCreation }) => {
-  const { register, handleSubmit } = useForm<FormFields>();
+  const formMethods = useForm<FormFields>();
   const { loggedUser } = useAuth();
   const createRoomMutation = useMutation<
     AxiosResponse<Room>,
@@ -37,16 +37,21 @@ const CreateRoomForm: React.FC<Props> = ({ afterCreation }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-4">
-      <InputWithIcon
-        HeroIcon={AnnotationIcon}
-        placeholder="Room name"
-        {...register("name")}
-      />
-      <Button color="primary" className="block mx-auto" type="submit">
-        Create
-      </Button>
-    </form>
+    <FormProvider {...formMethods}>
+      <form
+        onSubmit={formMethods.handleSubmit(onSubmit)}
+        className="p-4 space-y-4"
+      >
+        <InputWithIcon
+          HeroIcon={AnnotationIcon}
+          placeholder="Room name"
+          name="name"
+        />
+        <Button color="primary" className="block mx-auto" type="submit">
+          Create
+        </Button>
+      </form>
+    </FormProvider>
   );
 };
 

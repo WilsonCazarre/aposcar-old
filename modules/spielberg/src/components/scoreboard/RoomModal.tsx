@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import InputWithIcon from "../forms/InputWithIcon";
+import { FormProvider, useForm } from "react-hook-form";
 import { SearchIcon } from "@heroicons/react/outline";
 import Button from "../Button";
 import Modal from "../Modal";
 import { useMutation, useQuery } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import { Room } from "../../utils/apiEntities";
-import RoomItem from "./RoomItem";
 import useCurrentRoom from "../../utils/useCurrentRoom";
 import { AxiosError, AxiosResponse } from "axios";
 import CreateRoomForm from "./CreateRoomForm";
 import RoomsList from "./RoomsList";
-import { set } from "react-hook-form";
 import useAuth from "../../utils/useAuth";
 
 interface Props {
@@ -37,7 +36,7 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
     setIsModalOpen(false);
     setRoom(room);
   };
-  const [shareCode, setShareCode] = useState("");
+  const formMethods = useForm<FormFields>();
 
   const joinRoomMutation = useMutation<
     AxiosResponse<{ status: string }>,
@@ -48,9 +47,12 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
       refetch();
     },
     onSettled: () => {
-      setShareCode("");
+      formMethods.reset();
     },
   });
+  const onSubmit = (data: FormFields) => {
+    joinRoomMutation.mutate(data);
+  };
 
   return (
     <Modal
@@ -66,21 +68,27 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
         >
           {isCreatingRoom ? "Go back to rooms list" : "Create new room"}
         </Button>
-        <div className="flex justify-end items-center space-x-2">
-          <InputWithIcon
-            HeroIcon={SearchIcon}
-            size={10}
-            value={shareCode}
-            placeholder="Share code"
-            onChange={(e) => setShareCode(e.target.value)}
-          />
-          <Button
-            color="primary"
-            onClick={() => joinRoomMutation.mutate({ shareCode })}
+
+        <FormProvider {...formMethods}>
+          <form
+            className="flex justify-end items-center space-x-2"
+            onSubmit={formMethods.handleSubmit(onSubmit)}
           >
-            Join
-          </Button>
-        </div>
+            <InputWithIcon
+              HeroIcon={SearchIcon}
+              name="shareCode"
+              size={10}
+              placeholder="Share code"
+            />
+            <Button
+              color="primary"
+              type="submit"
+              loading={joinRoomMutation.isLoading}
+            >
+              Join
+            </Button>
+          </form>
+        </FormProvider>
       </div>
       <div>
         {isCreatingRoom ? (
