@@ -1,4 +1,6 @@
 import React from "react";
+import Loader from "react-loader-spinner";
+import { APOSCAR_YELLOW } from "../utils/constants";
 
 const colorClassNames = {
   primary: "bg-yellow text-gray-800",
@@ -13,17 +15,29 @@ export interface ButtonProps
 
 const Button: React.FC<ButtonProps> = ({ color, children, ...props }) => {
   const commonClassName = "py-1 px-6 text-center rounded";
-  const { className, disabled, ...rest } = props;
+  const { className, disabled, loading, ...rest } = props;
 
   return (
     <button
-      className={`${commonClassName} ${colorClassNames[color]} ${
+      className={`${commonClassName} ${colorClassNames[color]} h-8 ${
         className ?? ""
-      } ${disabled ? "cursor-not-allowed" : ""}`}
-      disabled={disabled}
+      } ${disabled || loading ? "cursor-not-allowed" : ""}`}
+      disabled={disabled || loading}
       {...rest}
     >
-      {children}
+      {loading ? (
+        <div className="mx-auto">
+          <Loader
+            type={"ThreeDots"}
+            color={color === "secondary" ? APOSCAR_YELLOW : "white"}
+            height="1em"
+            width="100%"
+            radius={1}
+          />
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 };

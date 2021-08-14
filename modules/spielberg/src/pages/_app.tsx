@@ -8,6 +8,8 @@ import React from "react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import Router from "next/router";
+import { toast, Toaster } from "react-hot-toast";
+import { AxiosError } from "axios";
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -21,7 +23,20 @@ Router.events.on("routeChangeError", () => {
 
 ReactModal.setAppElement("#__next");
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    mutations: {
+      onError: (e) => {
+        toast((e as AxiosError).response?.data.detail);
+      },
+    },
+    queries: {
+      onError: (e) => {
+        toast((e as AxiosError).response?.data.detail);
+      },
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -30,6 +45,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <Component {...pageProps} />
+            <Toaster
+              position="bottom-center"
+              toastOptions={{
+                className: "text-yellow",
+                style: {
+                  background: "var(--accent-color)",
+                },
+              }}
+            />
           </AuthProvider>
           <ReactQueryDevtools />
         </QueryClientProvider>

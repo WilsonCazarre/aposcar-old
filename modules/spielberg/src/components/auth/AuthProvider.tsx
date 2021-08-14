@@ -22,7 +22,7 @@ export interface UserToken {
 
 export interface Auth {
   loggedUser?: User;
-  login: (credentials: LoginCredentials) => void;
+  login: (credentials: LoginCredentials) => Promise<AxiosResponse<UserToken>>;
   logout: () => void;
 }
 
@@ -60,10 +60,6 @@ const AuthProvider: React.FC = ({ children }) => {
     AxiosError,
     LoginCredentials
   >((credentials) => kubrick.post("token/", credentials), {
-    onMutate: NProgress.start,
-    onSettled: () => {
-      NProgress.done();
-    },
     onSuccess: onLoginSuccess,
   });
 
@@ -89,7 +85,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ loggedUser: user, login: loginMutation.mutate, logout }}
+      value={{ loggedUser: user, login: loginMutation.mutateAsync, logout }}
     >
       {children}
     </AuthContext.Provider>

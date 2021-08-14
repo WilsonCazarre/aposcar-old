@@ -32,9 +32,9 @@ const AuthLayout: React.FC<Props> = ({ children, pageTitle }) => {
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>"
         />
       </Head>
-      <div className="w-96 py-24 mx-auto">
-        <Card>
-          <div className="pt-10 mx-auto">
+      <div className="w-96 pt-16 mx-auto">
+        <Card noMaxHeight>
+          <div className="pt-8 mx-auto">
             <AposcarLogo height="70" width="100%" />
             <div className="p-8 pt-16">{children}</div>
           </div>

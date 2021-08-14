@@ -4,6 +4,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   header?: ReactNode;
   noPadding?: boolean;
   childrenClassName?: string;
+  noMaxHeight?: boolean;
 }
 
 const Card: React.FC<Props> = ({
@@ -11,15 +12,16 @@ const Card: React.FC<Props> = ({
   noPadding,
   header,
   childrenClassName,
+  noMaxHeight,
   ...props
 }) => {
   const { className, ...rest } = props;
 
   return (
     <div
-      className={`flex flex-col bg-gray-800 border border-gray-700 rounded-xl max-h-[72vh] ${
-        className ?? ""
-      }`}
+      className={`flex flex-col bg-gray-800 border border-gray-700 rounded-xl ${
+        noMaxHeight ? "" : "max-h-[72vh]"
+      } ${className ?? ""}`}
       {...rest}
     >
       {header && (
