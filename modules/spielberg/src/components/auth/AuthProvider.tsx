@@ -4,7 +4,6 @@ import jwtDecode from "jwt-decode";
 import { useMutation, useQuery } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
-import NProgress from "nprogress";
 import { User } from "../../utils/apiEntities";
 
 export interface UserTokenClaims {
