@@ -29,6 +29,7 @@
     "react-query": "^3.17.3"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.170",
     "@types/nprogress": "^0.2.0",
     "@types/react": "17.0.11",
