@@ -10,7 +10,7 @@
     "importHelpers": true,
     "strict": true,
     "lib": ["ESNext", "DOM"],
-    "types": ["@types/jest"],
+    "types": ["cypress"],
     "module": "commonjs",
     "esModuleInterop": true,
     "preserveSymlinks": true,
@@ -18,11 +18,9 @@
     "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "isolatedModules": true
+    "forceConsistentCasingInFileNames": true
     // "baseUrl": "src"
   },
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "include": ["./**/*.ts"],
   "exclude": ["node_modules"]
 }
