@@ -45,12 +45,17 @@ const AuthProvider: React.FC = ({ children }) => {
     kubrick.defaults.headers["Authorization"] = `Bearer ${access}`;
     const decoded = jwtDecode<UserTokenClaims>(access);
     const date = new Date(decoded.exp * 1000);
-    setTimeout(
-      () => refreshMutation.mutate({ refresh }),
-      date.getTime() - new Date().getTime()
-    );
     localStorage.setItem(ACCESS_TOKEN_NAME, access);
     localStorage.setItem(REFRESH_TOKEN_NAME, refresh);
+    setTimeout(() => {
+      const token = localStorage.getItem(REFRESH_TOKEN_NAME);
+      {
+        token &&
+          refreshMutation.mutate({
+            refresh: token,
+          });
+      }
+    }, date.getTime() - new Date().getTime());
     await userQuery.refetch();
   };
 
