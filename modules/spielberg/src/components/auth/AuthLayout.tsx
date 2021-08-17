@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Card from "../Card";
 import AposcarLogo from "../../assets/icons/AposcarLogo";
 import useAuth from "../../utils/useAuth";
 import { useRouter } from "next/router";
@@ -7,6 +6,7 @@ import Head from "next/head";
 
 interface Props {
   pageTitle?: string;
+  submitButton?: React.ReactNode;
 }
 
 const AuthLayout: React.FC<Props> = ({ children, pageTitle }) => {
@@ -20,7 +20,7 @@ const AuthLayout: React.FC<Props> = ({ children, pageTitle }) => {
   }, [router, loggedUser]);
 
   return (
-    <div className="h-screen">
+    <div className="max-h-screen">
       <Head>
         <title>{pageTitle ?? "Aposcar"}</title>
         <meta
@@ -32,13 +32,9 @@ const AuthLayout: React.FC<Props> = ({ children, pageTitle }) => {
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>"
         />
       </Head>
-      <div className="w-96 pt-16 mx-auto">
-        <Card noMaxHeight>
-          <div className="pt-8 mx-auto">
-            <AposcarLogo height="70" width="100%" />
-            <div className="p-8 pt-16">{children}</div>
-          </div>
-        </Card>
+      <div className="max-w-xs mx-auto pt-16">
+        <AposcarLogo height="70" width="100%" />
+        <div className="mt-16">{children}</div>
       </div>
     </div>
   );

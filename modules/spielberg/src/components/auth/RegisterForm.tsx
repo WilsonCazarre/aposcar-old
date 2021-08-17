@@ -10,6 +10,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { User } from "../../utils/apiEntities";
 import useAuth from "../../utils/useAuth";
 import { REGEX_EMAIL } from "../../utils/constants";
+import Link from "next/link";
 
 interface FormFields {
   username: string;
@@ -58,8 +59,8 @@ const RegisterForm: React.FC = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-        <div className="space-y-2">
+      <form onSubmit={formMethods.handleSubmit(onSubmit)} id="registerForm">
+        <div className="space-y-4">
           <InputWithIcon
             HeroIcon={UserIcon}
             placeholder="username"
@@ -89,18 +90,19 @@ const RegisterForm: React.FC = () => {
             registerOptions={{ required: true }}
           />
         </div>
-        <div className="grid grid-cols-2 gap-2 mt-16">
-          <Button
-            type="button"
-            color={"secondary"}
-            onClick={() => router.push("/login")}
-            loading={isSubmitting}
-          >
-            Login
-          </Button>
-          <Button color={"primary"} type="submit" loading={isSubmitting}>
-            Register
-          </Button>
+        <Button
+          color={"primary"}
+          type="submit"
+          loading={isSubmitting}
+          className="w-full mt-7"
+        >
+          Register
+        </Button>
+        <div className="text-center mt-5">
+          Already have an account?{" "}
+          <Link href="/login" passHref>
+            <a className="text-yellow">Login</a>
+          </Link>
         </div>
       </form>
     </FormProvider>

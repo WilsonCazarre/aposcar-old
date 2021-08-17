@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import MainLayout from "../components/MainLayout";
+import MainLayout from "../components/layouts/MainLayout";
 
 const Custom404: React.FC = () => {
   const router = useRouter();

@@ -2,7 +2,7 @@ import React from "react";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { kubrick } from "../../utils/apiClient";
 import { User } from "../../utils/apiEntities";
-import MainLayout from "../../components/MainLayout";
+import MainLayout from "../../components/layouts/MainLayout";
 import Card from "../../components/Card";
 
 interface ProfilePageProps {

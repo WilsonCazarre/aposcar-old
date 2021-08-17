@@ -1,6 +1,5 @@
 import React from "react";
 import Loader from "react-loader-spinner";
-import { APOSCAR_YELLOW } from "../utils/constants";
 
 const colorClassNames = {
   primary: "bg-yellow text-gray-800",
@@ -29,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({ color, children, ...props }) => {
         <div className="mx-auto">
           <Loader
             type={"ThreeDots"}
-            color={color === "secondary" ? APOSCAR_YELLOW : "white"}
+            color={color === "secondary" ? "white" : "black"}
             height="1em"
             width="100%"
             radius={1}

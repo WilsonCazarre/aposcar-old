@@ -28,6 +28,7 @@ module.exports = {
           900: "#1a1a1c",
         },
         yellow: "#FFDF36",
+        red: "#CB3333",
       },
     },
   },

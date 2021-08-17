@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import MainLayout from "../../components/MainLayout";
+import MainLayout from "../../components/layouts/MainLayout";
 import Card from "../../components/Card";
 import CardHeader from "../../components/CardHeader";
 import { Category, Indication } from "../../utils/apiEntities";

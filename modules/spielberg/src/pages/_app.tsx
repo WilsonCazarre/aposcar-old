@@ -41,7 +41,7 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <div className="bg-gray-900 h-screen text-gray-50">
+      <div className="flex flex-col bg-gray-900 h-screen text-gray-50 overflow-y-auto">
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <Component {...pageProps} />

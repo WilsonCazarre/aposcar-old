@@ -4,15 +4,15 @@ import Button from "../Button";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useAuth from "../../utils/useAuth";
-import { LogoutIcon } from "@heroicons/react/outline";
 import ProfileButton from "./ProfileButton";
+import LogoutButton from "./LogoutButton";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
   const { loggedUser, logout } = useAuth();
 
   return (
-    <nav className="px-10 py-3 flex justify-between items-center flex-none">
+    <nav className="px-10 py-3 flex justify-between items-center flex-none bg-gray-900">
       <Link href="/">
         <a>
           <AposcarLogo />
@@ -21,9 +21,7 @@ const Navbar: React.FC = () => {
       <div>
         {loggedUser ? (
           <div className="flex items-center space-x-4">
-            <button onClick={logout} title="Logout">
-              <LogoutIcon className="text-white w-7 h-7 rotate-180" />
-            </button>
+            <LogoutButton />
             <ProfileButton user={loggedUser} />
           </div>
         ) : (

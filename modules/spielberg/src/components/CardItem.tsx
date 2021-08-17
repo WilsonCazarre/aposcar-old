@@ -5,7 +5,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 const CardItem: React.FC<Props> = ({ children, ...props }) => {
   const { className, ...rest } = props;
   return (
-    <div className={`p-6 ${className}`} {...rest}>
+    <div className={`py-2 px-4 ${className}`} {...rest}>
       {children}
     </div>
   );

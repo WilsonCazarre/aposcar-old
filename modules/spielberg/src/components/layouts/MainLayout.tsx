@@ -1,6 +1,5 @@
 import React from "react";
-import Navbar from "./navigation/Navbar";
-import Footer from "./navigation/Footer";
+import Navbar from "../navigation/Navbar";
 import Head from "next/head";
 
 interface Props {
@@ -22,8 +21,7 @@ const MainLayout: React.FC<Props> = ({ children, pageTitle }) => {
         />
       </Head>
       <Navbar />
-      <div className="mt-7 bg-gray-900">{children}</div>
-      <Footer />
+      {children}
     </>
   );
 };

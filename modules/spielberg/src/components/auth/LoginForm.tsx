@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 import useAuth from "../../utils/useAuth";
 import { useForm, FormProvider } from "react-hook-form";
 import { LoginCredentials } from "./AuthProvider";
+import Link from "next/link";
 
 const LoginForm: React.FC = () => {
-  const router = useRouter();
   const { login } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formMethods = useForm<LoginCredentials>();
@@ -31,8 +31,8 @@ const LoginForm: React.FC = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-        <div className="space-y-2">
+      <form onSubmit={formMethods.handleSubmit(onSubmit)} id="loginForm">
+        <div className="space-y-4">
           <InputWithIcon
             HeroIcon={UserIcon}
             placeholder="username"
@@ -47,18 +47,19 @@ const LoginForm: React.FC = () => {
             registerOptions={{ required: true }}
           />
         </div>
-        <div className="grid grid-cols-2 gap-2 mt-16">
-          <Button
-            color={"secondary"}
-            type="button"
-            onClick={() => router.push("/register")}
-            loading={isSubmitting}
-          >
-            Register
-          </Button>
-          <Button color={"primary"} type="submit" loading={isSubmitting}>
-            Login
-          </Button>
+        <Button
+          color={"primary"}
+          type="submit"
+          loading={isSubmitting}
+          className="w-full mt-7"
+        >
+          Login
+        </Button>
+        <div className="text-center mt-5">
+          Need an account?{" "}
+          <Link href="/register" passHref>
+            <a className="text-yellow">Register</a>
+          </Link>
         </div>
       </form>
     </FormProvider>

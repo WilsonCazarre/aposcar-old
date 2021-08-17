@@ -6,7 +6,8 @@
 @tailwind variants;
 
 :root{
-  --accent-color: #FFDF36
+  --accent-color: #FFDF36;
+  font-size: 18px
 }
 
 button:focus, input:focus {

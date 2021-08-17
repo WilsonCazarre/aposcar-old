@@ -15,6 +15,9 @@ export interface Category extends BaseEntity {
   name: string;
   urlField: string;
   indications: number[];
+  winnerIndication: Indication | null;
+  isWinner: boolean;
+  currentUserIndication: Indication | null;
 }
 
 export interface Nominee extends BaseEntity {
