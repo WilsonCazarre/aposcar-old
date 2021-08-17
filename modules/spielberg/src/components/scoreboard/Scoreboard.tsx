@@ -15,10 +15,12 @@ const Scoreboard: React.FC = () => {
 
   return (
     <div className="relative">
-      {/*<div className="text-center pb-4 sticky bg-gray-900 top-0">*/}
-      {/*  <div className="text-2xl">{currentRoom?.name ?? "Global Ranking"}</div>*/}
-      {/*  <div className="text-lg font-light">{"12 participants"}</div>*/}
-      {/*</div>*/}
+      <div className="text-center mb-4 sticky bg-gray-800 top-0 py-2 border-b border-gray-700">
+        <div className="text-2xl leading-6">
+          {currentRoom?.name ?? "Global Ranking"}
+        </div>
+        <div className="text-lg font-light leading-6">{"12 participants"}</div>
+      </div>
       <div className="space-y-3 overflow-y-auto h-full">
         {users
           ? users.data.map((user, index) => (

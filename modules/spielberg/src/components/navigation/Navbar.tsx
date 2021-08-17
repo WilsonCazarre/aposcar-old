@@ -15,10 +15,14 @@ const Navbar: React.FC = () => {
   const showUserOnSidebar = screenType !== "3-cols";
 
   return (
-    <nav className="px-10 py-3 flex justify-between items-center flex-none bg-gray-900">
+    <nav className="px-10 py-5 flex justify-between items-center flex-none bg-gray-900">
       <Link href="/">
         <a>
-          <AposcarLogo />
+          {screenType === "1-cols" ? (
+            <span className="underline text-5xl text-yellow">A</span>
+          ) : (
+            <AposcarLogo />
+          )}
         </a>
       </Link>
       {showUserOnSidebar && (

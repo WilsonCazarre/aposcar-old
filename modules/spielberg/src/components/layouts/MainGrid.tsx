@@ -15,8 +15,8 @@ const MainGrid: React.FC<Props> = ({
   showRightPanel1col,
 }) => {
   const screenType = useScreenType();
-  const columnClassName = "overflow-y-auto h-[calc(100vh-100px)]";
-  const gridClassName = "p-4 pt-0 gap-6";
+  const columnClassName = "overflow-y-auto h-[calc(100vh-120px)]";
+  const gridClassName = "pt-0 px-4 gap-6";
 
   if (screenType === "3-cols") {
     return (
