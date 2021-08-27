@@ -94,15 +94,21 @@ class RoomViewSet(viewsets.ModelViewSet):
     )
     def join_room(self, request, pk=None):
         room_queryset: QuerySet[models.Room] = models.Room.objects.all()
-        room = room_queryset.get(share_code=request.data["shareCode"])
+        try:
+            room = room_queryset.get(share_code=request.data["share_code"])
+        except models.Room.DoesNotExist:
+            return Response(
+                {"status": "This room does not exist"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         if room.users.filter(pk=request.user.id).exists():
             return Response(
-                {"status": "user is already on the room"},
+                {"status": "User is already on the room"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         room.users.add(request.user)
-        return Response({"status": "new user added"})
+        return Response({"status": "New user added"})
 
     @action(
         detail=True,
