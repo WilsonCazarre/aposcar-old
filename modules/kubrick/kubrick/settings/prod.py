@@ -56,14 +56,17 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
-        "logfile": {
+        "file": {
+            "level": "DEBUG",
             "class": "logging.FileHandler",
             "filename": "server.log",
         },
     },
     "loggers": {
         "django": {
-            "handlers": ["logfile"],
+            "handlers": ["file"],
+            "level": "DEBUG",
+            "propagate": True,
         },
     },
 }
