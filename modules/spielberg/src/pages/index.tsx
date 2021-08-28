@@ -28,13 +28,11 @@ const Home: React.FC<Props> = ({ categories }) => {
         <RoomProvider>
           <MainGrid
             leftPanel={
-              loggedUser && (
-                <>
-                  <ColumnHeader />
-                  <ProfileCard />
-                  <RoomCard />
-                </>
-              )
+              <>
+                <ColumnHeader />
+                <ProfileCard />
+                {loggedUser && <RoomCard />}
+              </>
             }
             rightPanel={<WinnersCard categories={categories} />}
             showRightPanel1col={showRightPanel}
