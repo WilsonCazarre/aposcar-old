@@ -12,6 +12,7 @@ import Button from "../components/Button";
 import { useScreenType } from "../utils/useScreenType";
 import ColumnHeader from "../components/layouts/ColumnHeader";
 import RoomCard from "../components/rooms/RoomCard";
+import useAuth from "../utils/useAuth";
 
 export interface Props {
   categories: Category[];
@@ -20,17 +21,20 @@ export interface Props {
 const Home: React.FC<Props> = ({ categories }) => {
   const [showRightPanel, setShowRightPanel] = useState(false);
   const screenType = useScreenType();
+  const { loggedUser } = useAuth();
   return (
     <>
       <MainLayout>
         <RoomProvider>
           <MainGrid
             leftPanel={
-              <>
-                <ColumnHeader />
-                <ProfileCard />
-                <RoomCard />
-              </>
+              loggedUser && (
+                <>
+                  <ColumnHeader />
+                  <ProfileCard />
+                  <RoomCard />
+                </>
+              )
             }
             rightPanel={<WinnersCard categories={categories} />}
             showRightPanel1col={showRightPanel}
