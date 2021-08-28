@@ -6,11 +6,12 @@ import {
   SwitchHorizontalIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import RoomCard from "../rooms/RoomCard";
 import useCurrentRoom from "../../utils/useCurrentRoom";
 import useAuth from "../../utils/useAuth";
 import { useMutation, useQueryClient } from "react-query";
 import { kubrick } from "../../utils/apiClient";
+import BaseModal from "../modals/BaseModal";
+import RoomController from "../rooms/RoomController";
 
 const ScoreboardCardHeader: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -82,7 +83,12 @@ const ScoreboardCardHeader: React.FC = () => {
           </div>
         )}
       </div>
-      <RoomCard isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <BaseModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      >
+        <RoomController />
+      </BaseModal>
     </CardHeader>
   );
 };
