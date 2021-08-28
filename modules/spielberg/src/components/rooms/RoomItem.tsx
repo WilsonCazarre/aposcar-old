@@ -1,11 +1,10 @@
 import React from "react";
 import { Room } from "../../utils/apiEntities";
 import CardItem from "../CardItem";
-import { LogoutIcon } from "@heroicons/react/outline";
+import { StarIcon } from "@heroicons/react/outline";
 import useAuth from "../../utils/useAuth";
 import { useMutation } from "react-query";
 import { kubrick } from "../../utils/apiClient";
-import { StarIcon } from "@heroicons/react/outline";
 import useCurrentRoom from "../../utils/useCurrentRoom";
 
 interface Props {
@@ -32,7 +31,7 @@ const RoomItem: React.FC<Props> = ({ room, onClick }) => {
   return (
     <CardItem className="border-t border-gray-700 flex justify-between items-center">
       <div className="flex items-center space-x-3">
-        <button className="text-2xl" onClick={onClick}>
+        <button className="text-2xl truncate" onClick={onClick}>
           {room.name}
         </button>
         {isOwner && (

@@ -1,28 +1,22 @@
 import React, { useState } from "react";
-import InputWithIcon from "../forms/InputWithIcon";
-import { FormProvider, useForm } from "react-hook-form";
-import { SearchIcon } from "@heroicons/react/outline";
 import Button from "../Button";
-import Modal from "../Modal";
+import { FormProvider, useForm } from "react-hook-form";
+import InputWithIcon from "../forms/InputWithIcon";
+import { SearchIcon } from "@heroicons/react/outline";
+import CreateRoomForm from "./CreateRoomForm";
+import RoomsList from "./RoomsList";
+import useAuth from "../../utils/useAuth";
 import { useMutation, useQuery } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import { Room } from "../../utils/apiEntities";
 import useCurrentRoom from "../../utils/useCurrentRoom";
 import { AxiosError, AxiosResponse } from "axios";
-import CreateRoomForm from "./CreateRoomForm";
-import RoomsList from "./RoomsList";
-import useAuth from "../../utils/useAuth";
-
-interface Props {
-  isModalOpen: boolean;
-  setIsModalOpen: (newState: boolean) => void;
-}
 
 interface FormFields {
   shareCode: string;
 }
 
-const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
+const RoomController: React.FC = () => {
   const { loggedUser } = useAuth();
   const { data: rooms, refetch } = useQuery(
     "rooms",
@@ -32,8 +26,7 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
   const { setRoom } = useCurrentRoom();
   const [isCreatingRoom, setIsCreatingRoom] = useState(false);
 
-  const setNewRoom = (room: Room) => {
-    setIsModalOpen(false);
+  const setNewRoom = (room: Room | undefined) => {
     setRoom(room);
   };
   const formMethods = useForm<FormFields>();
@@ -55,20 +48,8 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
   };
 
   return (
-    <Modal
-      title="Rooms"
-      subtitle="Create or join rooms"
-      isOpen={isModalOpen}
-      onRequestClose={() => setIsModalOpen(false)}
-    >
-      <div className="flex space-x-4 justify-between p-4">
-        <Button
-          color="secondary"
-          onClick={() => setIsCreatingRoom(!isCreatingRoom)}
-        >
-          {isCreatingRoom ? "Go back to rooms list" : "Create new room"}
-        </Button>
-
+    <div className="relative">
+      <div className="flex space-x-4 justify-between p-4 sticky top-0 bg-gray-800">
         <FormProvider {...formMethods}>
           <form
             className="flex justify-end items-center space-x-2"
@@ -90,20 +71,26 @@ const RoomModal: React.FC<Props> = ({ isModalOpen, setIsModalOpen }) => {
           </form>
         </FormProvider>
       </div>
-      <div>
-        {isCreatingRoom ? (
-          <CreateRoomForm
-            afterCreation={() => {
-              refetch();
-              setIsCreatingRoom(false);
-            }}
-          />
-        ) : (
-          <RoomsList setNewRoom={setNewRoom} rooms={rooms?.data} />
-        )}
+      {isCreatingRoom ? (
+        <CreateRoomForm
+          afterCreation={() => {
+            refetch();
+            setIsCreatingRoom(false);
+          }}
+        />
+      ) : (
+        <RoomsList setNewRoom={setNewRoom} rooms={rooms?.data} />
+      )}
+      <div className="bg-gray-800 sticky bottom-0 w-full p-2 text-center">
+        <Button
+          color="secondary"
+          onClick={() => setIsCreatingRoom(!isCreatingRoom)}
+        >
+          {isCreatingRoom ? "Go back to rooms list" : "Create new room"}
+        </Button>
       </div>
-    </Modal>
+    </div>
   );
 };
 
-export default RoomModal;
+export default RoomController;

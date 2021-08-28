@@ -1,10 +1,12 @@
 import React from "react";
 import RoomItem from "./RoomItem";
 import { Room } from "../../utils/apiEntities";
+import CardItem from "../CardItem";
+import { StarIcon } from "@heroicons/react/outline";
 
 interface Props {
   rooms?: Room[];
-  setNewRoom: (room: Room) => void;
+  setNewRoom: (room: Room | undefined) => void;
 }
 
 const RoomsList: React.FC<Props> = ({ rooms, setNewRoom }) => {
@@ -18,6 +20,16 @@ const RoomsList: React.FC<Props> = ({ rooms, setNewRoom }) => {
 
   return (
     <>
+      <CardItem>
+        <div className="flex items-center space-x-3">
+          <button
+            className="text-2xl truncate"
+            onClick={() => setNewRoom(undefined)}
+          >
+            Aposcar Global
+          </button>
+        </div>
+      </CardItem>
       {rooms.map((room) => (
         <RoomItem key={room.id} room={room} onClick={() => setNewRoom(room)} />
       ))}

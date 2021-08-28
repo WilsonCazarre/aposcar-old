@@ -3,7 +3,7 @@ import InputWithIcon from "../forms/InputWithIcon";
 import { LockClosedIcon, MailIcon, UserIcon } from "@heroicons/react/outline";
 import Button from "../Button";
 import { useRouter } from "next/router";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import { AxiosError, AxiosResponse } from "axios";

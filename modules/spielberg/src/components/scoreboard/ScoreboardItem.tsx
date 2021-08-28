@@ -1,7 +1,6 @@
 import React from "react";
 import { User } from "../../utils/apiEntities";
-import ScoreBar from "./ScoreBar";
-import { UserIcon } from "@heroicons/react/outline";
+import ScoreBar from "../rooms/ScoreBar";
 import ProfilePicture from "../profile/ProfilePicture";
 import CardItem from "../CardItem";
 

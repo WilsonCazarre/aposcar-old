@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import InputWithIcon from "../forms/InputWithIcon";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/outline";
 import Button from "../Button";
-import { useRouter } from "next/router";
 import useAuth from "../../utils/useAuth";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { LoginCredentials } from "./AuthProvider";
 import Link from "next/link";
 

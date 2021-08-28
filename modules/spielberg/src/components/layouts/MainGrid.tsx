@@ -15,24 +15,24 @@ const MainGrid: React.FC<Props> = ({
   showRightPanel1col,
 }) => {
   const screenType = useScreenType();
-  const columnClassName = "overflow-y-auto h-[calc(100vh-120px)]";
-  const gridClassName = "pt-0 px-4 gap-6";
+  const columnClassName = "flex flex-col";
+  const gridClassName = "flex pt-0 px-4 gap-6 min-h-0 flex-shrink pb-4";
 
   if (screenType === "3-cols") {
     return (
-      <div className={`grid grid-cols-4 ${gridClassName}`}>
-        <div className={`${columnClassName}`}>{leftPanel}</div>
-        <div className={`col-span-2 ${columnClassName}`}>{children}</div>
-        <div className={`${columnClassName}`}>{rightPanel}</div>
+      <div className={`${gridClassName}`}>
+        <div className={`${columnClassName} flex-1`}>{leftPanel}</div>
+        <div className={`${columnClassName} flex-grow`}>{children}</div>
+        <div className={`${columnClassName} flex-1`}>{rightPanel}</div>
       </div>
     );
   }
 
   if (screenType === "2-cols") {
     return (
-      <div className={`grid grid-cols-2 ${gridClassName}`}>
-        <div className={`${columnClassName}`}>{children}</div>
-        <div className={`${columnClassName}`}>{rightPanel}</div>
+      <div className={`${gridClassName}`}>
+        <div className={`${columnClassName} flex-1`}>{children}</div>
+        <div className={`${columnClassName} flex-1`}>{rightPanel}</div>
       </div>
     );
   }

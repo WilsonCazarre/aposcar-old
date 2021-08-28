@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import CardHeader from "../CardHeader";
 import {
-  SwitchHorizontalIcon,
   GlobeAltIcon,
   LogoutIcon,
+  SwitchHorizontalIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import RoomModal from "./RoomModal";
+import RoomCard from "../rooms/RoomCard";
 import useCurrentRoom from "../../utils/useCurrentRoom";
 import useAuth from "../../utils/useAuth";
 import { useMutation, useQueryClient } from "react-query";
@@ -82,7 +82,7 @@ const ScoreboardCardHeader: React.FC = () => {
           </div>
         )}
       </div>
-      <RoomModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <RoomCard isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </CardHeader>
   );
 };

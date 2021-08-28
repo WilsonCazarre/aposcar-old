@@ -1,12 +1,11 @@
 import React from "react";
 import AposcarLogo from "../../assets/icons/AposcarLogo";
-import Button from "../Button";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useAuth from "../../utils/useAuth";
 import ProfileButton from "./ProfileButton";
-import LogoutButton from "./LogoutButton";
 import { useScreenType } from "../../utils/useScreenType";
+import Button from "../Button";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -15,7 +14,10 @@ const Navbar: React.FC = () => {
   const showUserOnSidebar = screenType !== "3-cols";
 
   return (
-    <nav className="px-10 py-5 flex justify-between items-center flex-none bg-gray-900">
+    <nav
+      className="px-10 py-5 flex justify-between items-center
+      flex-none bg-gray-900 flex-shrink-0"
+    >
       <Link href="/">
         <a>
           {screenType === "1-cols" ? (
@@ -25,20 +27,20 @@ const Navbar: React.FC = () => {
           )}
         </a>
       </Link>
-      {showUserOnSidebar && (
-        <div>
-          {loggedUser ? (
-            <div className="flex items-center space-x-4">
-              <LogoutButton />
-              <ProfileButton user={loggedUser} />
-            </div>
+
+      <div className="flex items-center space-x-4">
+        <Link href={"https://github.com/WilsonCazarre/aposcar"}>
+          <a className="hover:underline">Github</a>
+        </Link>
+        {showUserOnSidebar &&
+          (loggedUser ? (
+            <ProfileButton user={loggedUser} />
           ) : (
-            <Button color="primary" onClick={() => router.push("/register")}>
-              Register
+            <Button color="primary" onClick={() => router.push("/login")}>
+              Login
             </Button>
-          )}
-        </div>
-      )}
+          ))}
+      </div>
     </nav>
   );
 };
