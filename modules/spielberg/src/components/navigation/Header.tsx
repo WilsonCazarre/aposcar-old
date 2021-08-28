@@ -7,7 +7,7 @@ import ProfileButton from "./ProfileButton";
 import { useScreenType } from "../../utils/useScreenType";
 import Button from "../Button";
 
-const Navbar: React.FC = () => {
+const Header: React.FC = () => {
   const router = useRouter();
   const { loggedUser } = useAuth();
   const screenType = useScreenType();
@@ -45,4 +45,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default Header;

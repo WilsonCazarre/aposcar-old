@@ -25,12 +25,14 @@ const ProfileButton: React.FC<Props> = ({ user, ...props }) => {
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(!isModalOpen)}
       >
-        <div className="flex justify-end">
-          <button className="p-4" onClick={() => setIsModalOpen(false)}>
-            <XIcon className="h-7 w-7" />
-          </button>
+        <div className="w-96">
+          <div className="flex justify-end">
+            <button className="p-4" onClick={() => setIsModalOpen(false)}>
+              <XIcon className="h-7 w-7" />
+            </button>
+          </div>
+          <ProfileCard />
         </div>
-        <ProfileCard />
       </BaseModal>
     </button>
   );

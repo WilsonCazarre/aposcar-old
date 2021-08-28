@@ -1,18 +1,19 @@
 import React from "react";
 import { useScreenType } from "../../utils/useScreenType";
+import { Routes } from "../../utils/constants";
 
 interface Props {
   className?: string;
   leftPanel?: React.ReactNode;
   rightPanel?: React.ReactNode;
-  showRightPanel1col?: boolean;
+  currentRoute: Routes;
 }
 
 const MainGrid: React.FC<Props> = ({
   children,
   rightPanel,
   leftPanel,
-  showRightPanel1col,
+  currentRoute,
 }) => {
   const screenType = useScreenType();
   const columnClassName = "flex flex-col";
@@ -39,8 +40,8 @@ const MainGrid: React.FC<Props> = ({
 
   // if 1-cols
   return (
-    <div className={`${gridClassName} ${columnClassName}`}>
-      {showRightPanel1col ? rightPanel : children}
+    <div className={`${gridClassName} ${columnClassName} pb-16`}>
+      {currentRoute === "categories" ? rightPanel : children}
     </div>
   );
 };

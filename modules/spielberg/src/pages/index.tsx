@@ -8,18 +8,20 @@ import Scoreboard from "../components/scoreboard/Scoreboard";
 import RoomProvider from "../components/rooms/RoomProvider";
 import ProfileCard from "../components/profile/ProfileCard";
 import WinnersCard from "../components/winners/WinnersCard";
-import Button from "../components/Button";
 import { useScreenType } from "../utils/useScreenType";
 import ColumnHeader from "../components/layouts/ColumnHeader";
 import RoomCard from "../components/rooms/RoomCard";
 import useAuth from "../utils/useAuth";
+import { Routes } from "../utils/constants";
+import { ChartBarIcon, FilmIcon } from "@heroicons/react/outline";
+import Navbar1Col from "../components/navigation/Navbar1Col";
 
 export interface Props {
   categories: Category[];
 }
 
 const Home: React.FC<Props> = ({ categories }) => {
-  const [showRightPanel, setShowRightPanel] = useState(false);
+  const [currentRoute, setCurrentRoute] = useState<Routes>("scoreboard");
   const screenType = useScreenType();
   const { loggedUser } = useAuth();
   return (
@@ -35,17 +37,15 @@ const Home: React.FC<Props> = ({ categories }) => {
               </>
             }
             rightPanel={<WinnersCard categories={categories} />}
-            showRightPanel1col={showRightPanel}
+            currentRoute={currentRoute}
           >
             <Scoreboard />
           </MainGrid>
           {screenType === "1-cols" && (
-            <Button
-              color="primary"
-              onClick={() => setShowRightPanel(!showRightPanel)}
-            >
-              toggle
-            </Button>
+            <Navbar1Col
+              currentRoute={currentRoute}
+              setCurrentRoute={setCurrentRoute}
+            />
           )}
         </RoomProvider>
       </MainLayout>
