@@ -81,11 +81,13 @@ const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const refresh = localStorage.getItem(REFRESH_TOKEN_NAME);
-    if (refresh) {
-      refreshMutation.mutate({ refresh });
-    }
+    refreshMutation.mutate({ refresh: refresh ?? "" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (refreshMutation.isLoading && !user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider

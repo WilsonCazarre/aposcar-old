@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import ScoreboardItem from "./ScoreboardItem";
 import useCurrentRoom from "../../utils/useCurrentRoom";
+import ColumnHeader from "../layouts/ColumnHeader";
 
 const Scoreboard: React.FC = () => {
   const { currentRoom } = useCurrentRoom();
@@ -14,43 +15,22 @@ const Scoreboard: React.FC = () => {
   );
 
   return (
-    <div className="relative">
-      <div className="text-center mb-4 sticky bg-gray-800 top-0 py-2 border-b border-gray-700">
-        <div className="text-2xl leading-6">
-          {currentRoom?.name ?? "Global Ranking"}
+    <>
+      <ColumnHeader>
+        <div className="text-4xl leading-6">
+          {currentRoom?.name ?? "Aposcar Global"}
         </div>
-        <div className="text-lg font-light leading-6">{"12 participants"}</div>
-      </div>
-      <div className="space-y-3 overflow-y-auto h-full">
+        <div className="text-2xl font-light leading-8">{"12 participants"}</div>
+      </ColumnHeader>
+
+      <div className="overflow-y-auto space-y-3">
         {users
           ? users.data.map((user, index) => (
-              <div className="space-y-3" key={user.id}>
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-                <ScoreboardItem user={user} userIdx={index} />
-              </div>
+              <ScoreboardItem key={user.id} user={user} userIdx={index} />
             ))
           : "Loading..."}
       </div>
-    </div>
+    </>
   );
 };
 

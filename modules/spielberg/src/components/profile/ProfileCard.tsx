@@ -41,7 +41,7 @@ const ProfileCard: React.FC = () => {
     );
   }
   return (
-    <div className={`flex flex-col text-center bg-gray-800 p-8`}>
+    <div className={`flex flex-col text-center ${wrapperClassName} px-24`}>
       <Button color="primary" onClick={() => router.push("/login")}>
         Login
       </Button>

@@ -1,13 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { XIcon } from "@heroicons/react/outline";
 
-interface Props extends ReactModal.Props {
-  title: string;
-  subtitle: string;
-}
-
-const Modal: React.FC<Props> = ({ children, title, subtitle, ...props }) => {
+const BaseModal: React.FC<ReactModal.Props> = ({ children, ...props }) => {
   return (
     <ReactModal
       shouldCloseOnEsc={true}
@@ -18,21 +12,9 @@ const Modal: React.FC<Props> = ({ children, title, subtitle, ...props }) => {
       rounded-lg"
       {...props}
     >
-      <div
-        className="bg-yellow text-gray-900 p-5
-      rounded-t-lg flex justify-between"
-      >
-        <div>
-          <div className="font-bold text-3xl">{title}</div>
-          <div className="text-xl">{subtitle}</div>
-        </div>
-        <button onClick={props.onRequestClose}>
-          <XIcon className="w-6 h-6" />
-        </button>
-      </div>
-      <div>{children}</div>
+      {children}
     </ReactModal>
   );
 };
 
-export default Modal;
+export default BaseModal;
