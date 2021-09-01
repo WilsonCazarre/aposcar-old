@@ -4,6 +4,8 @@ import { User } from "../../utils/apiEntities";
 import { UserIcon, XIcon } from "@heroicons/react/outline";
 import BaseModal from "../modals/BaseModal";
 import ProfileCard from "../profile/ProfileCard";
+import ProfileModal from "../profile/ProfileModal";
+import useAuth from "../../utils/useAuth";
 
 interface Props extends Omit<ButtonProps, "color"> {
   user: User;
@@ -11,30 +13,30 @@ interface Props extends Omit<ButtonProps, "color"> {
 
 const ProfileButton: React.FC<Props> = ({ user, ...props }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { loggedUser } = useAuth();
   return (
-    <button
-      className="flex items-center"
-      onClick={() => setIsModalOpen(!isModalOpen)}
-      {...props}
-    >
-      <UserIcon
-        className="w-12 h-12 p-2 bg-gray-800
-        text-gray-200 ring-yellow  rounded-full shadow-lg"
-      />
-      <BaseModal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(!isModalOpen)}
+    <>
+      <button
+        className="flex items-center"
+        onClick={() => {
+          console.log("called open");
+          setIsModalOpen(true);
+        }}
       >
-        <div className="w-96">
-          <div className="flex justify-end">
-            <button className="p-4" onClick={() => setIsModalOpen(false)}>
-              <XIcon className="h-7 w-7" />
-            </button>
-          </div>
-          <ProfileCard />
-        </div>
-      </BaseModal>
-    </button>
+        <UserIcon
+          className="w-12 h-12 p-2 bg-gray-800
+        text-gray-200 ring-yellow  rounded-full shadow-lg"
+        />
+      </button>
+      <ProfileModal
+        isOpen={isModalOpen}
+        onRequestClose={() => {
+          console.log("called close");
+          setIsModalOpen(false);
+        }}
+        user={loggedUser as User}
+      />
+    </>
   );
 };
 

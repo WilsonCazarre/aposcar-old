@@ -13,7 +13,6 @@ import ColumnHeader from "../components/layouts/ColumnHeader";
 import RoomCard from "../components/rooms/RoomCard";
 import useAuth from "../utils/useAuth";
 import { Routes } from "../utils/constants";
-import { ChartBarIcon, FilmIcon } from "@heroicons/react/outline";
 import Navbar1Col from "../components/navigation/Navbar1Col";
 
 export interface Props {
@@ -27,27 +26,25 @@ const Home: React.FC<Props> = ({ categories }) => {
   return (
     <>
       <MainLayout>
-        <RoomProvider>
-          <MainGrid
-            leftPanel={
-              <>
-                <ColumnHeader />
-                <ProfileCard />
-                {loggedUser && <RoomCard />}
-              </>
-            }
-            rightPanel={<WinnersCard categories={categories} />}
+        <MainGrid
+          leftPanel={
+            <>
+              <ColumnHeader />
+              <ProfileCard user={loggedUser} />
+              {loggedUser && <RoomCard />}
+            </>
+          }
+          rightPanel={<WinnersCard categories={categories} />}
+          currentRoute={currentRoute}
+        >
+          <Scoreboard />
+        </MainGrid>
+        {screenType === "1-cols" && (
+          <Navbar1Col
             currentRoute={currentRoute}
-          >
-            <Scoreboard />
-          </MainGrid>
-          {screenType === "1-cols" && (
-            <Navbar1Col
-              currentRoute={currentRoute}
-              setCurrentRoute={setCurrentRoute}
-            />
-          )}
-        </RoomProvider>
+            setCurrentRoute={setCurrentRoute}
+          />
+        )}
       </MainLayout>
     </>
   );

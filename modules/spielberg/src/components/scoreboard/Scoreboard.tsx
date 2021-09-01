@@ -5,6 +5,7 @@ import { kubrick } from "../../utils/apiClient";
 import ScoreboardItem from "./ScoreboardItem";
 import useCurrentRoom from "../../utils/useCurrentRoom";
 import ColumnHeader from "../layouts/ColumnHeader";
+import Loader from "react-loader-spinner";
 
 const Scoreboard: React.FC = () => {
   const { currentRoom } = useCurrentRoom();
@@ -24,11 +25,19 @@ const Scoreboard: React.FC = () => {
       </ColumnHeader>
 
       <div className="overflow-y-auto space-y-3">
-        {users
-          ? users.data.map((user, index) => (
-              <ScoreboardItem key={user.id} user={user} userIdx={index} />
-            ))
-          : "Loading..."}
+        {users ? (
+          users.data.map((user, index) => (
+            <ScoreboardItem key={user.id} user={user} userIdx={index} />
+          ))
+        ) : (
+          <Loader
+            type={"TailSpin"}
+            color={"var(--accent-color)"}
+            height="2em"
+            width="100%"
+            radius={1}
+          />
+        )}
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
 import { User } from "../../utils/apiEntities";
+import Loader from "react-loader-spinner";
 
 export interface UserTokenClaims {
   tokenType: "access" | "refresh";
@@ -86,7 +87,17 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   if (refreshMutation.isLoading && !user) {
-    return <div>Loading...</div>;
+    return (
+      <div className={"flex items-center h-full justify-center"}>
+        <Loader
+          type={"TailSpin"}
+          color={"var(--accent-color)"}
+          height="4em"
+          width="100%"
+          radius={1}
+        />
+      </div>
+    );
   }
 
   return (
