@@ -6,6 +6,7 @@ import ReactModal from "react-modal";
 import { User } from "../../utils/apiEntities";
 import RoomCard from "../rooms/RoomCard";
 import useCurrentRoom from "../../utils/useCurrentRoom";
+import useAuth from "../../utils/useAuth";
 
 interface Props extends ReactModal.Props {
   user: User;
@@ -13,6 +14,7 @@ interface Props extends ReactModal.Props {
 
 const ProfileModal: React.FC<Props> = ({ user, onRequestClose, ...props }) => {
   const { currentRoom } = useCurrentRoom();
+  const { loggedUser } = useAuth();
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     closeButtonRef.current?.click();
@@ -27,7 +29,7 @@ const ProfileModal: React.FC<Props> = ({ user, onRequestClose, ...props }) => {
         </div>
         <div className="divide-y divide-gray-700">
           <ProfileCard user={user} />
-          <RoomCard />
+          {loggedUser?.id === user.id && <RoomCard />}
         </div>
       </div>
     </BaseModal>
