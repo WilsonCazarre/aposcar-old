@@ -94,8 +94,14 @@ class RoomViewSet(viewsets.ModelViewSet):
     )
     def join_room(self, request, pk=None):
         room_queryset: QuerySet[models.Room] = models.Room.objects.all()
+        share_code = request.data.get("shareCode")
+        if not share_code:
+            return Response(
+                {"status": "You need to pass the share code"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         try:
-            room = room_queryset.get(share_code=request.data["share_code"])
+            room = room_queryset.get(share_code=share_code)
         except models.Room.DoesNotExist:
             return Response(
                 {"status": "This room does not exist"},
