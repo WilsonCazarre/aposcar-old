@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
 
-:root{
-  --accent-color: #FFDF36;
-  font-size: 14px
+:root {
+  --accent-color: #ffdf36;
+  font-size: 14px;
 }
 
-button:focus, input:focus {
+button:focus,
+input:focus {
   outline: none;
 }
 
@@ -35,8 +36,7 @@ button:focus, input:focus {
 }
 
 #nprogress .peg {
-  box-shadow: 0 0 10px var(--accent-color),
-  0 0 5px var(--accent-color) !important;
+  box-shadow: 0 0 10px var(--accent-color), 0 0 5px var(--accent-color) !important;
 }
 
 #nprogress .spinner-icon {

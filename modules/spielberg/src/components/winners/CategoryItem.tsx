@@ -3,14 +3,23 @@ import CardItem from "../CardItem";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { Category } from "../../utils/apiEntities";
 import useAuth from "../../utils/useAuth";
+import CategoryOptions from "./CategoryOptions";
 
 interface Props {
   name: string;
   category: Category;
+  index: number;
+  currentIndex: number | undefined;
+  onClick: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const CategoryItem: React.FC<Props> = ({ name, category }) => {
-  const { loggedUser } = useAuth();
+const CategoryItem: React.FC<Props> = ({
+  name,
+  category,
+  index,
+  currentIndex,
+  onClick,
+}) => {
   const winnerName = category.winnerIndication?.nominated?.name;
   const userChoice = category.currentUserIndication?.nominated.name;
   const isWinner = winnerName === userChoice;
@@ -20,11 +29,9 @@ const CategoryItem: React.FC<Props> = ({ name, category }) => {
     miss: "bg-red text-black",
     default: "bg-gray-800 text-gray-50",
   };
-  const [showNominees, setShowNominees] = useState(false);
 
-  const [currentStatus, setCurrentStatus] = useState<
-    keyof typeof statusClasses
-  >("default");
+  const [currentStatus, setCurrentStatus] =
+    useState<keyof typeof statusClasses>("default");
   useEffect(() => {
     if (!winnerName) {
       setCurrentStatus("default");
@@ -40,7 +47,7 @@ const CategoryItem: React.FC<Props> = ({ name, category }) => {
         className={`flex items-center justify-between ${
           statusClasses[winnerName && userChoice ? currentStatus : "default"]
         }`}
-        onClick={() => setShowNominees(!showNominees)}
+        onClick={onClick}
       >
         <div>
           <div className="text-2xl font-bold">{name}</div>
@@ -57,7 +64,7 @@ const CategoryItem: React.FC<Props> = ({ name, category }) => {
           }`}
         />
       </CardItem>
-      {showNominees && <div>Nominees go la la la</div>}
+      {index === currentIndex && <CategoryOptions category={category} />}
     </div>
   );
 };
