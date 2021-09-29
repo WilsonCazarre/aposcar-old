@@ -69,3 +69,11 @@ class IndicationReadOnlySerializer(IndicationSerializer):
     class Meta:
         model = models.Indication
         fields = IndicationSerializer.Meta.fields
+
+
+class CategoryDetailSerializer(CategorySerializer):
+    indications = IndicationReadOnlySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Category
+        fields = CategorySerializer.Meta.fields

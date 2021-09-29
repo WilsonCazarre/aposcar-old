@@ -43,6 +43,14 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CategorySerializer
     permission_classes = [IsStaffOrReadOnly]
 
+    def retrieve(self, request, url_field=None, format=None, **kwargs):
+        queryset = self.get_queryset()
+        category = get_object_or_404(queryset, url_field=url_field)
+        serializer = serializers.CategoryDetailSerializer(
+            category, context={"request": request}
+        )
+        return Response(serializer.data)
+
 
 class NomineeViewSet(viewsets.ModelViewSet):
     queryset = models.Nominee.objects.filter()
