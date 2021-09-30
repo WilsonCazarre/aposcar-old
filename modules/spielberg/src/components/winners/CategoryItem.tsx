@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import CardItem from "../CardItem";
 import { CheckIcon, XIcon } from "@heroicons/react/outline";
 import { Category } from "../../utils/apiEntities";
-import useAuth from "../../utils/useAuth";
 import CategoryOptions from "./CategoryOptions";
 
 interface Props {

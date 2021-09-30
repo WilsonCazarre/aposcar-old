@@ -1,5 +1,5 @@
 from django.core.mail import EmailMultiAlternatives
-from django.db.models import Count, QuerySet
+from django.db.models import Count, QuerySet, Case, When
 from django.dispatch import receiver
 
 from django.template.loader import render_to_string
@@ -32,7 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
         if ordering := self.request.query_params.get("ordering"):
             queryset = queryset.annotate(
-                score=Count("bets__is_winner")
+                score=Count(Case(When(bets__is_winner=True, then=1)))
             ).order_by(ordering.strip("/"))
         return queryset
 

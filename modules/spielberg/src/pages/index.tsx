@@ -15,14 +15,11 @@ import useAuth from "../utils/useAuth";
 import { Routes } from "../utils/constants";
 import Navbar1Col from "../components/navigation/Navbar1Col";
 
-export interface Props {
-  categories: Category[];
-}
-
-const Home: React.FC<Props> = ({ categories }) => {
+const Home: React.FC = () => {
   const [currentRoute, setCurrentRoute] = useState<Routes>("scoreboard");
   const screenType = useScreenType();
   const { loggedUser } = useAuth();
+
   return (
     <>
       <MainLayout>
@@ -34,7 +31,7 @@ const Home: React.FC<Props> = ({ categories }) => {
               {loggedUser && <RoomCard />}
             </>
           }
-          rightPanel={<WinnersCard categories={categories} />}
+          rightPanel={<WinnersCard />}
           currentRoute={currentRoute}
         >
           <Scoreboard />
@@ -51,12 +48,3 @@ const Home: React.FC<Props> = ({ categories }) => {
 };
 
 export default Home;
-
-export async function getServerSideProps(
-  context: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<Props>> {
-  const response = await kubrick.get<Category[]>("categories/");
-  return {
-    props: { categories: response.data },
-  };
-}

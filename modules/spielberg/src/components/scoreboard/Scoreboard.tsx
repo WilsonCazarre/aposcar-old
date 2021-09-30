@@ -11,7 +11,7 @@ const Scoreboard: React.FC = () => {
   const { currentRoom } = useCurrentRoom();
   const { data: users } = useQuery(["users", `room=${currentRoom?.id}`], () =>
     kubrick.get<User[]>(
-      `users/?ordering=-score/${currentRoom ? `&room=${currentRoom.id}` : ""}`
+      `users/?ordering=-score${currentRoom ? `&room=${currentRoom.id}` : ""}`
     )
   );
 

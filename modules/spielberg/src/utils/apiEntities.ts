@@ -20,6 +20,10 @@ export interface Category extends BaseEntity {
   currentUserIndication: Indication | null;
 }
 
+export interface CategoryDetail extends Omit<Category, "indications"> {
+  indications: Indication[];
+}
+
 export interface Nominee extends BaseEntity {
   name: string;
   pictureUrl: string;

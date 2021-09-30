@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from "../../utils/constants";
 import jwtDecode from "jwt-decode";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { kubrick } from "../../utils/apiClient";
 import { AxiosError, AxiosResponse } from "axios";
 import { User } from "../../utils/apiEntities";
@@ -35,6 +35,7 @@ export interface LoginCredentials {
 
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
+  const queryClient = useQueryClient();
 
   const userQuery = useQuery<AxiosResponse<User>>(
     ["users", user?.username],
@@ -73,6 +74,7 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem(REFRESH_TOKEN_NAME);
     kubrick.defaults.headers["Authorization"] = undefined;
     setUser(undefined);
+    queryClient.invalidateQueries("categories");
   };
 
   const refreshMutation = useMutation(
