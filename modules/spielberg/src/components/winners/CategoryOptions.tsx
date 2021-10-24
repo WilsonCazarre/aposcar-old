@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Category, CategoryDetail } from "../../utils/apiEntities";
 import { useQuery, useQueryClient } from "react-query";
 import { kubrick } from "../../utils/apiClient";
@@ -6,8 +6,8 @@ import { AxiosResponse } from "axios";
 import Loader from "react-loader-spinner";
 import useDefaultMutation from "../../utils/useDefaultMutation";
 import useAuth from "../../utils/useAuth";
-import { useForm } from "react-hook-form";
-import Button from "../Button";
+import { useForm, FormProvider } from "react-hook-form";
+import CategoryOption from "./CategoryOption";
 
 interface Props {
   category: Category;
@@ -21,10 +21,17 @@ const CategoryOptions: React.FC<Props> = ({ category }) => {
   const { loggedUser } = useAuth();
   const { data, isLoading } = useQuery<AxiosResponse<CategoryDetail>>(
     ["category", category.urlField],
-    () => kubrick.get(`categories/${category.urlField}/`),
-    { onSuccess: (data1) => console.log(data1) }
+    () => kubrick.get(`categories/${category.urlField}/`)
   );
-  const { handleSubmit, register } = useForm<FormFields>();
+  const { handleSubmit, watch, ...methods } = useForm<FormFields>();
+  const watchIndicationId = watch("indicationId");
+
+  useEffect(() => {
+    if (watchIndicationId && !loggedUser?.bets.includes(watchIndicationId)) {
+      handleSubmit(onSubmit)();
+    }
+  }, [watchIndicationId, handleSubmit]);
+
   const queryClient = useQueryClient();
   const submitGuessMutation = useDefaultMutation<FormFields>(
     `users/${loggedUser?.username}/guess/`,
@@ -36,6 +43,7 @@ const CategoryOptions: React.FC<Props> = ({ category }) => {
       },
     }
   );
+
   if (isLoading) {
     return (
       <Loader
@@ -52,32 +60,14 @@ const CategoryOptions: React.FC<Props> = ({ category }) => {
   };
 
   return (
-    <div className="p-4 bg-gray-80">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {data?.data.indications.map((indication) => (
-          <div key={indication.id}>
-            <label>
-              <input
-                {...register("indicationId")}
-                type="radio"
-                value={indication.id}
-              />
-              <span
-                className={`${
-                  loggedUser?.bets.includes(indication.id)
-                    ? "text-yellow"
-                    : "text-white"
-                }`}
-              >
-                {indication.nominated.name}
-              </span>
-            </label>
-          </div>
-        ))}
-        <Button color="primary" type="submit">
-          Submit
-        </Button>
-      </form>
+    <div className="bg-gray-80 mt-2">
+      <FormProvider {...{ handleSubmit, watch, ...methods }}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+          {data?.data.indications.map((indication) => (
+            <CategoryOption indication={indication} key={indication.id} />
+          ))}
+        </form>
+      </FormProvider>
     </div>
   );
 };

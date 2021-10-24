@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import MainLayout from "../components/layouts/MainLayout";
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { kubrick } from "../utils/apiClient";
-import { Category } from "../utils/apiEntities";
 import MainGrid from "../components/layouts/MainGrid";
 import Scoreboard from "../components/scoreboard/Scoreboard";
-import RoomProvider from "../components/rooms/RoomProvider";
 import ProfileCard from "../components/profile/ProfileCard";
 import WinnersCard from "../components/winners/WinnersCard";
 import { useScreenType } from "../utils/useScreenType";
