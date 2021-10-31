@@ -17,6 +17,7 @@ const CategoryOption: React.FC<Props> = ({ indication }) => {
     <label className="block bg-gray-800 w-full text-left p-4 flex items-center space-x-2">
       <input
         type={"radio"}
+        disabled={!loggedUser}
         {...register("indicationId")}
         value={indication.id}
         className="w-6 h-6 p-4"

@@ -6,8 +6,9 @@ import { AxiosResponse } from "axios";
 import Loader from "react-loader-spinner";
 import useDefaultMutation from "../../utils/useDefaultMutation";
 import useAuth from "../../utils/useAuth";
-import { useForm, FormProvider } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import CategoryOption from "./CategoryOption";
+import { InformationCircleIcon } from "@heroicons/react/outline";
 
 interface Props {
   category: Category;
@@ -61,6 +62,12 @@ const CategoryOptions: React.FC<Props> = ({ category }) => {
 
   return (
     <div className="bg-gray-80 mt-2">
+      {!loggedUser && (
+        <div className="bg-yellow text-black p-2 flex items-center mb-2">
+          <InformationCircleIcon className="w-6 h-6 mr-1" />
+          You need to login before submit a guess
+        </div>
+      )}
       <FormProvider {...{ handleSubmit, watch, ...methods }}>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
           {data?.data.indications.map((indication) => (
