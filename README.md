@@ -1,5 +1,5 @@
 <p align="center">
-    <img height=100 src="https://raw.githubusercontent.com/lab-quatro/aposcar/main/aposcar_logo.svg"/>
+    <img height=100 src="https://raw.githubusercontent.com/lab-quatro/WilsonCazarre/main/aposcar_logo.svg"/>
 </p>
 
 <p align="center">
